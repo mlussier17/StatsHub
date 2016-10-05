@@ -32,17 +32,17 @@ public class MainActivity extends AppCompatActivity {
         this.soccerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, HockeyActivity.class);
+                Intent i = new Intent(MainActivity.this, SoccerActivity.class);
                 startActivity(i);
             }
         });
 
-        //Listener on the soccer button to redirect to the soccer activity
-        this.soccerButton = (Button)this.findViewById(R.id.Soccer);
-        this.soccerButton.setOnClickListener(new View.OnClickListener() {
+        //Listener on the soccer button to redirect to the marqueur activity
+        this.marqueurButton = (Button)this.findViewById(R.id.Marqueur);
+        this.marqueurButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, HockeyActivity.class);
+                Intent i = new Intent(MainActivity.this, MarqueurActivity.class);
                 startActivity(i);
             }
         });
