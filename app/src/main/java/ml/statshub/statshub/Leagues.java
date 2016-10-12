@@ -7,5 +7,17 @@ package ml.statshub.statshub;
 public class Leagues {
     public int _idLeagues;
     public String _leagueName;
+    public int _nbTeams;
+
+    public Leagues(){
+
+    }
+
+    public void setId(int id){_idLeagues = id;}
+    public void setName(String name){_leagueName = name;}
+    public void setTeams(int number){_nbTeams = number;}
+    public int getTeams(){return _nbTeams;}
+    public int getId(){return _idLeagues;}
+    public String getName(){return _leagueName;}
 
 }

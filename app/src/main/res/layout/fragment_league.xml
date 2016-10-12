@@ -19,12 +19,36 @@
         android:background="#FF909090" />
 
 
-    <TextView
+    <RecyclerView
         android:id="@+id/ListLeagues"
         android:layout_below="@id/line"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Ligue1" />
+        android:layout_width="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="fish name"
+            android:id="@+id/textName"
+            android:layout_marginLeft="5dp"
+            android:layout_toLeftOf="@+id/textTeams"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="price"
+            android:id="@+id/textTeams"
+            android:textColor="@color/colorAccent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+
+
+    </RecyclerView>
 
     <!--<LinearLayout
         android:layout_width="match_parent"
