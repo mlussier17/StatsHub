@@ -5,9 +5,9 @@ package ml.statshub.statshub;
  */
 
 public class Leagues {
-    public int _idLeagues;
-    public String _leagueName;
-    public int _nbTeams;
+    private int _idLeagues;
+    private String _leagueName;
+    private int _nbTeams;
 
     public Leagues(){
 

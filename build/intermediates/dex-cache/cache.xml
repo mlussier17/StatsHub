@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="1c7e63e59148a7c4b8041c08340285e4d28e9391">
+        sha1="2cd049a7dcf53f0d379634a1b99fb62b539f91d3">
         <dex dex="C:\Users\196128636\Desktop\Session5\ProjetFinal\Android\StatsHub\StatsHubGit\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_19f76c2d9bcfbf2a831b04e35fc4b12156f2ef69\classes.dex" />
     </item>
     <item
@@ -268,7 +268,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="e2f4976ebe7f0463be42e3ed5bec3308b24085e3">
+        sha1="e19ca44da9c6622ec461a3a525e32fa71ec1e96e">
         <dex dex="C:\Users\196128636\Desktop\Session5\ProjetFinal\Android\StatsHub\StatsHubGit\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_d728e1e9f05f4ec6a9675af7f78baf1ce0f3a8b2\classes.dex" />
     </item>
     <item
@@ -309,21 +309,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\196128636\Desktop\Session5\ProjetFinal\Android\StatsHub\StatsHubGit\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.2"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="C:\Users\196128636\Desktop\Session5\ProjetFinal\Android\StatsHub\StatsHubGit\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_54c773cbaf8e69c9acc8f1d88356d6f633115903.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\196128636\Desktop\Session5\ProjetFinal\Android\StatsHub\StatsHubGit\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.2"
         sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
         <dex dex="C:\Users\196128636\Desktop\Session5\ProjetFinal\Android\StatsHub\StatsHubGit\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-24.2.1_62909e08802ae83c921436649d501f7251b571cf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\196128636\Desktop\Session5\ProjetFinal\Android\StatsHub\StatsHubGit\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="C:\Users\196128636\Desktop\Session5\ProjetFinal\Android\StatsHub\StatsHubGit\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_54c773cbaf8e69c9acc8f1d88356d6f633115903.jar" />
     </item>
 
 </items>

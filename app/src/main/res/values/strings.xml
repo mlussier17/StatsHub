@@ -4,7 +4,7 @@
     <string name="soccer">Soccer</string>
     <string name="marqueur">Marqueur</string>
     <string name="menu">Menu</string>
-    <string name="title_activity_hockey">HockeyActivity</string>
+    <string name="title_activity_hockey">Hockey</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

@@ -1,11 +1,18 @@
 package ml.statshub.statshub;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,8 +25,6 @@ public class LeaguesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context context;
     private LayoutInflater inflater;
     List<Leagues> data = Collections.emptyList();
-    Leagues ligue;
-    int current = 0;
 
     public LeaguesAdapter(Context c, List<Leagues> leagues){
         context = c;
@@ -29,7 +34,7 @@ public class LeaguesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.fragment_league, parent,false);
+        View view=inflater.inflate(R.layout.layoutleagues, parent,false);
         MyHolder holder=new MyHolder(view);
         return holder;
     }
@@ -39,8 +44,20 @@ public class LeaguesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         // Get current position of item in recyclerview to bind data and assign values from list
         MyHolder myHolder= (MyHolder) holder;
-        Leagues current = data.get(position);
-        myHolder.textName.setText(current._leagueName);
+        final Leagues current = data.get(position);
+        myHolder.textName.setText(current.getName());
+        myHolder.textSize.setText(current.getTeams() + "");
+        myHolder.textName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, TeamsActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("id",current.getId());
+                b.putString("name",current.getName());
+                i.putExtras(b);
+                context.startActivity(i);
+            }
+        });
 
     }
 
@@ -57,8 +74,8 @@ public class LeaguesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
         // create constructor to get widget reference
         public MyHolder(View itemView) {
             super(itemView);
-            textName= (TextView) itemView.findViewById(R.id.textName);
-            textSize = (TextView) itemView.findViewById(R.id.textTeams);
+            textName= (TextView)itemView.findViewById(R.id.textName);
+            textSize = (TextView)itemView.findViewById(R.id.textTeams);
         }
 
     }

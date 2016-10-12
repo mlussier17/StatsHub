@@ -29,78 +29,53 @@ import java.util.List;
 
 public class LeagueFragment extends Fragment{
 
+    private RecyclerView rView;
 
-    private HTTPRequest query;
 
-
-    public LeagueFragment() {
-        // Required empty public constructor
-    }
+    public LeagueFragment() {}
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        new BackgroundTask((AppCompatActivity)getActivity()).execute();
-    }
+    public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_league, container, false);
+        View view = inflater.inflate(R.layout.fragment_league, container, false);
+        rView = (RecyclerView)view.findViewById(R.id.ListLeagues);
+        rView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        new BackgroundTask((AppCompatActivity)getActivity(), rView).execute();
+        return view;
     }
 
 }
 
 class BackgroundTask extends AsyncTask<Void,Void,String>{
 
-    public BackgroundTask(AppCompatActivity c){
+    public BackgroundTask(AppCompatActivity c, RecyclerView vue){
         _c = c;
+        leaguesLists = vue;
     }
     private AppCompatActivity _c;
-    private URLQuery links;
     private String jsonString;
     String jsonUrl;
     private RecyclerView leaguesLists;
     private LeaguesAdapter lAdapter;
 
     @Override
-    protected void onPreExecute() {
-            jsonUrl = links.URL_LIST_HOCKEY_LEAGUES;
-    }
+    protected void onPreExecute() {jsonUrl = URLQuery.URL_LIST_HOCKEY_LEAGUES;}
 
     @Override
     protected String doInBackground(Void... params) {
-        try {
-            URL url = new URL(jsonUrl);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder stringBuilder = new StringBuilder();
+        HTTPRequest request = new HTTPRequest();
+        jsonString = request.getQueryToHDB(jsonUrl);
 
-            while ((jsonString = reader.readLine()) != null) {
-                stringBuilder.append(jsonString+"\n");
-            }
-            reader.close();
-            inputStream.close();
-            httpURLConnection.disconnect();
-
-            return stringBuilder.toString();
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return jsonString;
     }
 
 
     @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
-    }
+    protected void onProgressUpdate(Void... values) {super.onProgressUpdate(values);}
 
     @Override
     protected void onPostExecute(String s) {
@@ -110,18 +85,18 @@ class BackgroundTask extends AsyncTask<Void,Void,String>{
             for(int i=0;i<jArray.length();i++){
                 JSONObject json_data = jArray.getJSONObject(i);
                 Leagues ligues = new Leagues();
-                ligues._idLeagues = json_data.getInt("idHLeagues");
-                ligues._leagueName= json_data.getString("Name");
-                //ligues._nbTeams = json_data.getInt("NbTeam");
+                ligues.setId(json_data.getInt("idHLeagues"));
+                ligues.setName(json_data.getString("Name"));
+                ligues.setTeams(json_data.getInt("NbTeam"));
                 leaguesList.add(ligues);
             }
-            leaguesLists = (RecyclerView)_c.findViewById(R.id.ListLeagues);
             lAdapter = new LeaguesAdapter(_c,leaguesList);
             leaguesLists.setAdapter(lAdapter);
-            leaguesLists.setLayoutManager(new LinearLayoutManager(_c));
+
+            lAdapter.notifyDataSetChanged();
 
             //TextView textView = (TextView) _c.findViewById(R.id.ListLeagues);
-            //textView.setText(s);
+            //textView.setText(leaguesList);
         } catch (JSONException e) {
             e.printStackTrace();
         }
