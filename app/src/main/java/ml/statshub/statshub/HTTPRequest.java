@@ -73,6 +73,7 @@ public class HTTPRequest {
         String response = "";
         String jsonString = null;
         HttpURLConnection conn = null;
+        StringBuilder stringBuilder = new StringBuilder();
         try {
             url = new URL(requestURL);
 
@@ -95,16 +96,15 @@ public class HTTPRequest {
             int responseCode=conn.getResponseCode();
 
             if (responseCode == HttpsURLConnection.HTTP_OK) {
-                String line;
                 BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder stringBuilder = new StringBuilder();
-                while ((line=br.readLine()) != null) {
+
+                while ((jsonString=br.readLine()) != null) {
                     stringBuilder.append(jsonString+"\n");
                 }
             } else {
                 response="";
             }
-            response = jsonString;
+            response = stringBuilder.toString();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
