@@ -79,8 +79,9 @@ class BackgroundTask1 extends AsyncTask<Void,Void,String> {
             for(int i=0;i<jArray.length();i++){
                 JSONObject json_data = jArray.getJSONObject(i);
                 Teams teams = new Teams();
-                teams.setId(json_data.getInt("idHLeagues"));
+                teams.setId(json_data.getInt("idHTeams"));
                 teams.setTeams(json_data.getString("Name"));
+                teams.setNbGP(json_data.getInt("NbGP"));
                 teams.setWins(json_data.getInt("NbWins"));
                 teams.setLoses(json_data.getInt("NbLoses"));
                 teams.setOTLoses(json_data.getInt("NbOTLoses"));

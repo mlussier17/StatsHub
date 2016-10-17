@@ -19,7 +19,7 @@ import java.util.List;
 public class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private Context context;
     private LayoutInflater inflater;
-    List<Teams> data = Collections.emptyList();
+    private List<Teams> data = Collections.emptyList();
 
     public TeamsAdapter(Context c, List<Teams> teams) {
         context = c;
@@ -30,8 +30,7 @@ public class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=inflater.inflate(R.layout.layoutteams, parent,false);
-        TeamsAdapter.MyHolder holder=new TeamsAdapter.MyHolder(view);
-        return holder;
+        return new TeamsAdapter.MyHolder(view);
     }
 
     @Override
@@ -41,7 +40,15 @@ public class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         TeamsAdapter.MyHolder myHolder= (TeamsAdapter.MyHolder) holder;
         final Teams current = data.get(position);
         myHolder.textName.setText(current.getName());
-        myHolder.textSize.setText(current.getWins() + "");
+        myHolder.textGP.setText(current.getGP() + "");
+        myHolder.textWins.setText(current.getWins() + "");
+        myHolder.textLoses.setText(current.getLoses() + "");
+        myHolder.textOTLoses.setText(current.getOTLoses() + "");
+        myHolder.textSOLoses.setText(current.getSOLoses() + "");
+        myHolder.textPoints.setText(current.getPoints() + "");
+        myHolder.textGF.setText(current.getGF() + "");
+        myHolder.textGA.setText(current.getGA() + "");
+
 //        myHolder.textName.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -64,13 +71,29 @@ public class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     class MyHolder extends RecyclerView.ViewHolder{
 
         TextView textName;
+        TextView textGP;
+        TextView textWins;
+        TextView textLoses;
+        TextView textOTLoses;
+        TextView textSOLoses;
+        TextView textPoints;
+        TextView textGF;
+        TextView textGA;
+
         TextView textSize;
 
         // create constructor to get widget reference
         public MyHolder(View itemView) {
             super(itemView);
             textName= (TextView) itemView.findViewById(R.id.teamName);
-            textSize = (TextView) itemView.findViewById(R.id.teamWins);
+            textWins= (TextView) itemView.findViewById(R.id.teamWins);
+            textGP= (TextView) itemView.findViewById(R.id.teamGP);
+            textLoses= (TextView) itemView.findViewById(R.id.teamLoses);
+            textOTLoses= (TextView) itemView.findViewById(R.id.teamOT);
+            textSOLoses= (TextView) itemView.findViewById(R.id.teamSO);
+            textPoints= (TextView) itemView.findViewById(R.id.teamPts);
+            textGF= (TextView) itemView.findViewById(R.id.teamGF);
+            textGA= (TextView) itemView.findViewById(R.id.teamGA);
         }
 
     }
