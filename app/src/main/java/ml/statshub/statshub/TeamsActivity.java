@@ -85,9 +85,9 @@ class BackgroundTask1 extends AsyncTask<Void,Void,String> {
                 teams.setLoses(json_data.getInt("NbLoses"));
                 teams.setOTLoses(json_data.getInt("NbOTLoses"));
                 teams.setSOLoses(json_data.getInt("NbSOLoses"));
-                //teams.setPoints(json_data.getInt("NbPoints"));
-               // teams.setGF(json_data.getInt("NbGF"));
-                teams.setGA(json_data.getInt("NbGA"));
+                teams.setPoints(json_data.getInt("NbPoints"));
+                teams.setGF(json_data.getInt("NbGoalsFor"));
+                teams.setGA(json_data.getInt("NbGoalsAgainst"));
                 teamsList.add(teams);
             }
             tAdapter = new TeamsAdapter(_c,teamsList);
