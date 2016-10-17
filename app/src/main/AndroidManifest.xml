@@ -23,7 +23,8 @@
             android:name=".HockeyActivity"
             android:label="@string/title_activity_hockey"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TeamsActivity"></activity>
+        <activity android:name=".TeamsActivity" />
+        <activity android:name=".PlayersFromTeamsActivity"></activity>
     </application>
 
 </manifest>

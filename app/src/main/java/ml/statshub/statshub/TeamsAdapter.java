@@ -49,17 +49,17 @@ public class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         myHolder.textGF.setText(current.getGF() + "");
         myHolder.textGA.setText(current.getGA() + "");
 
-//        myHolder.textName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(context, TeamsActivity.class);
-//                Bundle b = new Bundle();
-//                b.putInt("id",current.getId());
-//                b.putString("name",current.getName());
-//                i.putExtras(b);
-//                //context.startActivity(i);
-//            }
-//        });
+        myHolder.textName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, PlayersFromTeamsActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("id",current.getId());
+                b.putString("name",current.getName());
+                i.putExtras(b);
+                context.startActivity(i);
+            }
+        });
 
     }
 
