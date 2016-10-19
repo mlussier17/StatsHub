@@ -53,7 +53,7 @@ public class HockeyActivity extends AppCompatActivity
 
         if (id == R.id.leagues) {
             fragment = new LeagueFragment();
-            Toast.makeText(HockeyActivity.this, "SUP NIGGA", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(HockeyActivity.this, "SUP NIGGA", Toast.LENGTH_SHORT).show();
             // Handle the camera action
 
         } else if (id == R.id.nav_slideshow) {

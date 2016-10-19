@@ -5,10 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -46,14 +42,14 @@ class BackgroundTask1 extends AsyncTask<Void,Void,String> {
     }
     private AppCompatActivity _c;
     private String jsonString;
-    String jsonUrl;
+    private String jsonUrl;
     private RecyclerView teamsLists;
-    private TeamsAdapter tAdapter;
+
     private HashMap<String,String> hMap = new HashMap<>();
 
     @Override
     protected void onPreExecute() {
-        jsonUrl = URLQuery.URL_LIST_HOCKEY_TEAMS_FFORM_LEAGUES;
+        jsonUrl = URLQuery.URL_LIST_HOCKEY_TEAMS_FROM_LEAGUES;
     }
 
     @Override
@@ -73,6 +69,7 @@ class BackgroundTask1 extends AsyncTask<Void,Void,String> {
 
     @Override
     protected void onPostExecute(String s) {
+        TeamsAdapter tAdapter;
         List<Teams> teamsList = new ArrayList<>();
         try {
             JSONArray jArray = new JSONArray(s);

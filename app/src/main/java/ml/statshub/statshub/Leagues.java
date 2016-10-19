@@ -9,10 +9,6 @@ public class Leagues {
     private String _leagueName;
     private int _nbTeams;
 
-    public Leagues(){
-
-    }
-
     public void setId(int id){_idLeagues = id;}
     public void setName(String name){_leagueName = name;}
     public void setTeams(int number){_nbTeams = number;}
