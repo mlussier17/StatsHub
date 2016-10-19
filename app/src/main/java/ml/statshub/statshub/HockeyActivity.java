@@ -10,10 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 public class HockeyActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,11 @@ public class HockeyActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        if(savedInstanceState == null){
+            onNavigationItemSelected(navigationView.getMenu().getItem(2));
+            navigationView.getMenu().getItem(2).setChecked(true);
+        }
+
     }
 
     @Override
@@ -56,7 +60,8 @@ public class HockeyActivity extends AppCompatActivity
             //Toast.makeText(HockeyActivity.this, "SUP NIGGA", Toast.LENGTH_SHORT).show();
             // Handle the camera action
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.Calendar) {
+            fragment = new CalendarFragment();
 
         } else if (id == R.id.nav_manage) {
 

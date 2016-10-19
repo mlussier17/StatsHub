@@ -11,7 +11,7 @@
             android:id="@+id/teams"
             android:title="Meneurs" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/Calendar"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Calendrier" />
         <item
