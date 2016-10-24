@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="# équipes"
-        android:layout_alignParentTop="true"
         android:textSize="15dp"/>
     </LinearLayout>
     <View
@@ -40,7 +39,6 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/ListLeagues"
-            android:layout_below="@id/line"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" >
 

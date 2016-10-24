@@ -8,6 +8,7 @@ public class Players {
     private int _id;
     private String _fName;
     private String _name;
+    private int _number;
     private int _nbGP;
     private int _nbG;
     private int _nbA;
@@ -15,8 +16,11 @@ public class Players {
     private int _nbPPG;
     private int _nbPKG;
     private int _nbPen;
+    private int _nbRC;
+    private int _nbYC;
 
     public void setId(int id){_id = id;}
+    public void setNumber(int id){_number = id;}
     public void setFName(String players){_fName = players;}
     public void setName(String id){_name = id;}
     public void setGP(int id){_nbGP = id;}
@@ -26,8 +30,11 @@ public class Players {
     public void setPPG(int id){_nbPPG = id;}
     public void setPKG(int id){_nbPKG = id;}
     public void setPenalty(int id){_nbPen = id;}
+    public void setYC(int id){_nbYC = id;}
+    public void setRC(int id){_nbRC = id;}
 
     public int getId(){return _id;}
+    public int getNumber(){return _number;}
     public String getFName(){return _fName;}
     public String getName(){return _name;}
     public int getGP(){return _nbGP;}
@@ -37,4 +44,6 @@ public class Players {
     public int getPPG(){return _nbPPG;}
     public int getPKG(){return _nbPKG;}
     public int getPen(){return _nbPen;}
+    public int getRC(){return _nbRC;}
+    public int getYC(){return _nbYC;}
 }

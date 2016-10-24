@@ -15,6 +15,10 @@ public class Teams {
     private int _nbPoints;
     private int _nbGF;
     private int _nbGA;
+    private int _nbTies;
+    private int _nbYC;
+    private int _nbRC;
+
 
     public void setId(int id){_idTeams = id;}
     public void setTeams(String teams){_teamsName = teams;}
@@ -26,6 +30,9 @@ public class Teams {
     public void setPoints(int id){_nbPoints = id;}
     public void setGF(int id){_nbGF = id;}
     public void setGA(int id){_nbGA = id;}
+    public void setTies(int id){_nbTies = id;}
+    public void setYC(int id){_nbYC = id;}
+    public void setRC(int id){_nbRC = id;}
 
     public int getId(){return _idTeams;}
     public String getName(){return _teamsName;}
@@ -37,6 +44,9 @@ public class Teams {
     public int getPoints(){return _nbPoints;}
     public int getGF(){return _nbGF;}
     public int getGA(){return _nbGA;}
+    public int getTies(){return _nbTies;}
+    public int getYC(){return _nbYC;}
+    public int getRC(){return _nbRC;}
 
 
 }

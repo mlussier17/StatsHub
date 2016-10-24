@@ -17,14 +17,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SoccerActivity" />
         <activity android:name=".MarqueurActivity" />
         <activity
             android:name=".HockeyActivity"
             android:label="@string/title_activity_hockey"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TeamsActivity" />
-        <activity android:name=".PlayersFromTeamsActivity"></activity>
+        <activity android:name=".PlayersFromTeamsActivity" />
+        <activity
+            android:name=".SoccerActivity"
+            android:label="@string/title_activity_soccer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".STeamsActivity"></activity>
     </application>
 
 </manifest>
