@@ -21,9 +21,9 @@ public class SPlayersFromTeamsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_players_from_teams);
+        setContentView(R.layout.activity_splayers_from_teams);
         bundle = getIntent().getExtras();
-        setContentView(R.layout.activity_players_from_teams);
+        setContentView(R.layout.activity_splayers_from_teams);
         TextView test;
         test = (TextView)findViewById(R.id.showPlayers);
         test.setText(bundle.getString("name"));
@@ -46,12 +46,12 @@ class BackgroundTask6 extends AsyncTask<Void,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        jsonUrl = URLQuery.URL_LIST_HOCKEY_PLAYERS_FROM_TEAMS;
+        jsonUrl = URLQuery.URL_LIST_SOCCER_PLAYERS_FROM_TEAMS;
     }
 
     @Override
     protected String doInBackground(Void... params) {
-        hMap.put("id",PlayersFromTeamsActivity.bundle.getInt("id") + "");
+        hMap.put("id",SPlayersFromTeamsActivity.bundle.getInt("id") + "");
         HTTPRequest request = new HTTPRequest();
         jsonString = request.postQueryToHDB(jsonUrl,hMap);
 
@@ -66,14 +66,14 @@ class BackgroundTask6 extends AsyncTask<Void,Void,String> {
 
     @Override
     protected void onPostExecute(String s) {
-        PlayersTeamsAdapter pAdapter;
+        SPlayersTeamsAdapter pAdapter;
         List<Players> playersList = new ArrayList<>();
         try {
             JSONArray jArray = new JSONArray(s);
             for(int i=0;i<jArray.length();i++){
                 JSONObject json_data = jArray.getJSONObject(i);
                 Players players = new Players();
-                players.setId(json_data.getInt("idHPlayers"));
+                players.setId(json_data.getInt("idSPlayers"));
                 players.setFName(json_data.getString("FirstName"));
                 players.setName(json_data.getString("LastName"));
                 players.setNumber(json_data.getInt("Number"));
@@ -84,7 +84,7 @@ class BackgroundTask6 extends AsyncTask<Void,Void,String> {
                 players.setRC(json_data.getInt("NbRedCards"));
                 playersList.add(players);
             }
-            pAdapter = new PlayersTeamsAdapter(_c,playersList);
+            pAdapter = new SPlayersTeamsAdapter(_c,playersList);
             playersLists.setAdapter(pAdapter);
 
             pAdapter.notifyDataSetChanged();

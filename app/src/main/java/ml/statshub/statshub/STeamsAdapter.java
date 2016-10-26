@@ -45,13 +45,13 @@ public class STeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         myHolder.textLoses.setText(current.getLoses() + "");
         myHolder.textOTLoses.setText(current.getTies() + "");
         myHolder.textPoints.setText(current.getPoints() + "");
-        myHolder.textGF.setText(current.getGF() + "");
-        myHolder.textGA.setText(current.getGA() + "");
+        myHolder.textGF.setText(current.getYC() + "");
+        myHolder.textGA.setText(current.getRC() + "");
 
         myHolder.textName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, PlayersFromTeamsActivity.class);
+                Intent i = new Intent(context, SPlayersFromTeamsActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("id",current.getId());
                 b.putString("name",current.getName());
