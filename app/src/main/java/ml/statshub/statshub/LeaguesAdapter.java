@@ -12,10 +12,6 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by 196128636 on 2016-10-12.
- */
-
 public class LeaguesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private Context context;
     private LayoutInflater inflater;
@@ -45,7 +41,7 @@ public class LeaguesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
         myHolder.textName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, TeamsActivity.class);
+                Intent i = new Intent(context, LeadersActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("id",current.getId());
                 b.putString("name",current.getName());

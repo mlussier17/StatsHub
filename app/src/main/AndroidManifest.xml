@@ -28,8 +28,11 @@
             android:name=".SoccerActivity"
             android:label="@string/title_activity_soccer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".STeamsActivity"></activity>
+        <activity android:name=".STeamsActivity" />
         <activity android:name=".SPlayersFromTeamsActivity" />
+        <activity android:name=".LeaguesLeaderAdapter" />
+        <activity android:name=".LeadersActivity" />
+        <activity android:name=".PlayersLeadersAdapter"></activity>
     </application>
 
 </manifest>

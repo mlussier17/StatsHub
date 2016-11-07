@@ -76,6 +76,7 @@ class BackgroundTask2 extends AsyncTask<Void,Void,String> {
                 players.setId(json_data.getInt("idHPlayers"));
                 players.setFName(json_data.getString("FirstName"));
                 players.setName(json_data.getString("LastName"));
+                players.setNumber(json_data.getInt("Number"));
                 players.setGP(json_data.getInt("NbGP"));
                 players.setGoals(json_data.getInt("NbGoals"));
                 players.setAssists(json_data.getInt("NbAssists"));

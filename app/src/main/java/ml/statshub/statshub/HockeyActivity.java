@@ -55,17 +55,9 @@ public class HockeyActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.leagues) {
-            fragment = new LeagueFragment();
-            //Toast.makeText(HockeyActivity.this, "SUP NIGGA", Toast.LENGTH_SHORT).show();
-            // Handle the camera action
-
-        } else if (id == R.id.Calendar) {
-            fragment = new CalendarFragment();
-
-        } else if (id == R.id.nav_manage) {
-
-        }
+        if (id == R.id.leagues) {fragment = new LeagueFragment();}
+        else if (id == R.id.Calendar) {fragment = new CalendarFragment();}
+        else if (id == R.id.leaders) {fragment = new LeaguesLeadersFragment();}
 
         Fragment myFragment = getSupportFragmentManager().findFragmentByTag(id + "");
         if (!(myFragment != null && myFragment.isVisible()) && fragment != null) {

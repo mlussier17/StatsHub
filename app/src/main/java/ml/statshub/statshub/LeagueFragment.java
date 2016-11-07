@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -83,9 +82,6 @@ class BackgroundTask extends AsyncTask<Void,Void,String>{
             leaguesLists.setAdapter(lAdapter);
 
             lAdapter.notifyDataSetChanged();
-
-            //TextView textView = (TextView) _c.findViewById(R.id.ListLeagues);
-            //textView.setText(leaguesList);
         } catch (JSONException e) {
             e.printStackTrace();
         }

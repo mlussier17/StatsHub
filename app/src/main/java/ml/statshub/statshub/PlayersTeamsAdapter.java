@@ -41,6 +41,7 @@ public class PlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final Players current = data.get(position);
         myHolder.textName.setText(current.getName());
         myHolder.textFName.setText(current.getFName());
+        myHolder.textNumber.setText(current.getNumber() + "");
         myHolder.textGP.setText(current.getGP() + "");
         myHolder.textG.setText(current.getGoals() + "");
         myHolder.textA.setText(current.getAssists() + "");
@@ -59,6 +60,7 @@ public class PlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         TextView textName;
         TextView textFName;
+        TextView textNumber;
         TextView textGP;
         TextView textG;
         TextView textA;
@@ -67,13 +69,11 @@ public class PlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView textPKG;
         TextView textPen;
 
-        TextView textSize;
-
-        // create constructor to get widget reference
         public MyHolder(View itemView) {
             super(itemView);
             textName= (TextView) itemView.findViewById(R.id.playerName);
             textFName= (TextView) itemView.findViewById(R.id.playerFName);
+            textNumber= (TextView) itemView.findViewById(R.id.playerNumber);
             textGP= (TextView) itemView.findViewById(R.id.playerGP);
             textG= (TextView) itemView.findViewById(R.id.playerGoals);
             textA= (TextView) itemView.findViewById(R.id.playerAssists);
