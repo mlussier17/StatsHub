@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ml.statshub.statshub.MarqueurActivity">
+    tools:context="ml.statshub.statshub.Marqueur.MarqueurActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -30,6 +30,25 @@
             android:layout_marginBottom="10dp"
             android:inputType="textPassword"
             android:hint="Mot de passe"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hockey"
+                android:checked="true"
+                android:id="@+id/rbHockey"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Soccer"
+
+                android:id="@+id/rbSoccer"/>
+        </RadioGroup>
 
         <Button
             android:layout_gravity="center"

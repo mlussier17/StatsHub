@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import ml.statshub.statshub.Hockey.HockeyActivity;
+import ml.statshub.statshub.Marqueur.MarqueurActivity;
+import ml.statshub.statshub.Soccer.SoccerActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button hockeyButton;

@@ -17,24 +17,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MarqueurActivity" />
+        <activity android:name=".Marqueur.MarqueurActivity" />
         <activity
-            android:name=".HockeyActivity"
+            android:name=".Hockey.HockeyActivity"
             android:label="@string/title_activity_hockey"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TeamsActivity" />
-        <activity android:name=".PlayersFromTeamsActivity" />
+        <activity android:name=".Hockey.TeamsActivity" />
+        <activity android:name=".Hockey.PlayersFromTeamsActivity" />
         <activity
-            android:name=".SoccerActivity"
+            android:name=".Soccer.SoccerActivity"
             android:label="@string/title_activity_soccer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".STeamsActivity" />
-        <activity android:name=".SPlayersFromTeamsActivity" />
-        <activity android:name=".LeaguesLeaderAdapter" />
-        <activity android:name=".LeadersActivity" />
-        <activity android:name=".PlayersLeadersAdapter" />
-        <activity android:name=".SLeadersActivity" />
-        <activity android:name=".LoggedMarqueurActivity"></activity>
+        <activity android:name=".Soccer.STeamsActivity" />
+        <activity android:name=".Soccer.SPlayersFromTeamsActivity" />
+        <activity android:name=".Hockey.LeaguesLeaderAdapter" />
+        <activity android:name=".Hockey.LeadersActivity" />
+        <activity android:name=".Hockey.PlayersLeadersAdapter" />
+        <activity android:name=".Soccer.SLeadersActivity" />
+        <activity android:name=".Marqueur.HockeyMarqueur" />
+        <activity android:name=".Marqueur.SoccerMarqueur"></activity>
     </application>
 
 </manifest>

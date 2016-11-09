@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ml.statshub.statshub.CalendarFragment">
+    tools:context="ml.statshub.statshub.Hockey.CalendarFragment">
 
     <com.marcohc.robotocalendar.RobotoCalendarView
         android:id="@+id/robotoCalendarPicker"
