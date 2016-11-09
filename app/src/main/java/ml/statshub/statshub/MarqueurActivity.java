@@ -1,5 +1,6 @@
 package ml.statshub.statshub;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -79,7 +80,8 @@ class BackgroundTaskLogin extends AsyncTask<Void,Void,String> {
                 Toast.makeText(_c,"Usager/Mot de passe invalide",Toast.LENGTH_SHORT).show();
             }
             if (login == 1){
-                Toast.makeText(_c,"Connexion works",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(_c,LoggedMarqueurActivity.class);
+                _c.startActivity(i);
             }
             //lAdapter = new LeaguesAdapter(_c,leaguesList);
             //leaguesLists.setAdapter(lAdapter);

@@ -32,7 +32,9 @@
         <activity android:name=".SPlayersFromTeamsActivity" />
         <activity android:name=".LeaguesLeaderAdapter" />
         <activity android:name=".LeadersActivity" />
-        <activity android:name=".PlayersLeadersAdapter"></activity>
+        <activity android:name=".PlayersLeadersAdapter" />
+        <activity android:name=".SLeadersActivity" />
+        <activity android:name=".LoggedMarqueurActivity"></activity>
     </application>
 
 </manifest>

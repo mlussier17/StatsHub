@@ -13,7 +13,7 @@ public class URLQuery {
     public static String URL_LIST_SOCCER_LEAGUES = "http://74.57.129.224:51009/Android/ListSLeagues.php";
     public static String URL_LIST_SOCCER_TEAMS_FROM_LEAGUES = "http://74.57.129.224:51009/Android/ListSTeamsFromId.php";
     public static String URL_LIST_SOCCER_PLAYERS_FROM_TEAMS = "http://74.57.129.224:51009/Android/ListSPlayersFromTeams.php";
-
+    public static String URL_LIST_SOCCER_LEADERS_PER_LEAGUES = "http://74.57.129.224:51009/Android/ListSPlayersFromLeagues.php";
 
     public static String URL_LOGIN = "http://74.57.129.224:51009/Android/LoginMarqueur.php";
 

@@ -41,7 +41,7 @@ public class LeaguesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolde
         myHolder.textName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, LeadersActivity.class);
+                Intent i = new Intent(context, TeamsActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("id",current.getId());
                 b.putString("name",current.getName());

@@ -31,10 +31,10 @@ public class SoccerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-//        if(savedInstanceState == null){
-//            onNavigationItemSelected(navigationView.getMenu().getItem(2));
-//            navigationView.getMenu().getItem(2).setChecked(true);
-//        }
+        if(savedInstanceState == null){
+            onNavigationItemSelected(navigationView.getMenu().getItem(2));
+            navigationView.getMenu().getItem(2).setChecked(true);
+        }
 
     }
 
@@ -58,14 +58,12 @@ public class SoccerActivity extends AppCompatActivity
 
         if (id == R.id.leagues) {
             fragment = new SLeagueFragment();
-            //Toast.makeText(HockeyActivity.this, "SUP NIGGA", Toast.LENGTH_SHORT).show();
-            // Handle the camera action
 
         } else if (id == R.id.Calendar) {
             fragment = new SCalendarFragment();
 
-        } else if (id == R.id.nav_manage) {
-
+        } else if (id == R.id.leaders) {
+            fragment = new SLeaguesLeadersFragment();
         }
 
         Fragment myFragment = getSupportFragmentManager().findFragmentByTag(id + "");

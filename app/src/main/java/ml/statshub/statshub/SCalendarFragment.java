@@ -26,6 +26,9 @@ public class SCalendarFragment extends Fragment implements  RobotoCalendarView.R
         view = inflater.inflate(R.layout.fragment_scalendar, container, false);
         robotoCalendarView = (RobotoCalendarView) view.findViewById(R.id.SrobotoCalendarPicker);
         robotoCalendarView.setRobotoCalendarListener(this);
+        //TODO mark days on the calendar from the db games
+        
+
         return view;
     }
 
