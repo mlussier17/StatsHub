@@ -35,7 +35,8 @@
         <activity android:name=".Hockey.PlayersLeadersAdapter" />
         <activity android:name=".Soccer.SLeadersActivity" />
         <activity android:name=".Marqueur.HockeyMarqueur" />
-        <activity android:name=".Marqueur.SoccerMarqueur"></activity>
+        <activity android:name=".Marqueur.SoccerMarqueur" />
+        <activity android:name=".Marqueur.SStartGamesActivity"></activity>
     </application>
 
 </manifest>

@@ -66,10 +66,6 @@ class BackgroundTask4 extends AsyncTask<Void,Void,String> {
         return jsonString;
     }
 
-
-    @Override
-    protected void onProgressUpdate(Void... values) {super.onProgressUpdate(values);}
-
     @Override
     protected void onPostExecute(String s) {
         List<Leagues> leaguesList = new ArrayList<>();
