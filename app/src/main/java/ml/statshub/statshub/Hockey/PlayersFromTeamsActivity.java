@@ -26,7 +26,6 @@ public class PlayersFromTeamsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_players_from_teams);
         bundle = getIntent().getExtras();
         setContentView(R.layout.activity_players_from_teams);
         TextView test;

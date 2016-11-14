@@ -10,33 +10,52 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Marqueur.MarqueurActivity" />
+        <activity android:name=".Marqueur.MarqueurActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Hockey.HockeyActivity"
             android:label="@string/title_activity_hockey"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Hockey.TeamsActivity" />
-        <activity android:name=".Hockey.PlayersFromTeamsActivity" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Hockey.TeamsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Hockey.PlayersFromTeamsActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".Soccer.SoccerActivity"
             android:label="@string/title_activity_soccer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Soccer.STeamsActivity" />
-        <activity android:name=".Soccer.SPlayersFromTeamsActivity" />
-        <activity android:name=".Hockey.LeaguesLeaderAdapter" />
-        <activity android:name=".Hockey.LeadersActivity" />
-        <activity android:name=".Hockey.PlayersLeadersAdapter" />
-        <activity android:name=".Soccer.SLeadersActivity" />
-        <activity android:name=".Marqueur.HockeyMarqueur" />
-        <activity android:name=".Marqueur.SoccerMarqueur" />
-        <activity android:name=".Marqueur.SStartGamesActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".Soccer.STeamsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Soccer.SPlayersFromTeamsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Hockey.LeaguesLeaderAdapter"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Hockey.LeadersActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Hockey.PlayersLeadersAdapter"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Soccer.SLeadersActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Marqueur.Hockey.HockeyMarqueur"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Marqueur.Soccer.SoccerMarqueur"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Marqueur.Soccer.SStartGamesActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="ml.statshub.statshub.Marqueur.SoccerMarqueur">
+    tools:context="ml.statshub.statshub.Marqueur.Soccer.SoccerMarqueur">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/soccerGames"

@@ -14,6 +14,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import ml.statshub.statshub.Marqueur.Hockey.HockeyMarqueur;
+import ml.statshub.statshub.Marqueur.Soccer.SoccerMarqueur;
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
 import ml.statshub.statshub.Request.URLQuery;

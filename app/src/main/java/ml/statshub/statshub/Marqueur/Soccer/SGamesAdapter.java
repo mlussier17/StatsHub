@@ -1,0 +1,90 @@
+package ml.statshub.statshub.Marqueur.Soccer;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.Collections;
+import java.util.List;
+
+import ml.statshub.statshub.Class.Games;
+import ml.statshub.statshub.R;
+
+/**
+ * Created by 196128636 on 2016-11-14.
+ */
+
+public class SGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+    private Context context;
+    private LayoutInflater inflater;
+    private List<Games> data = Collections.emptyList();
+
+    public SGamesAdapter(Context c, List<Games> games){
+        this.context = c;
+        this.inflater = LayoutInflater.from(this.context);
+        this.data = games;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view=inflater.inflate(R.layout.layoutsoccergames, parent,false);
+        return new SGamesAdapter.MyHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        // Get current position of item in recyclerview to bind data and assign values from list
+        MyHolder myHolder= (SGamesAdapter.MyHolder) holder;
+        final Games current = data.get(position);
+        myHolder.textAway.setText(current.getAwayName());
+        myHolder.textHome.setText(current.getHomeName());
+        myHolder.textLocation.setText(current.getLocation());
+        myHolder.textDate.setText(current.getDate() + "");
+
+        myHolder.rLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, SStartGamesActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("id",current.getId());
+                b.putInt("awayID",current.getAway());
+                b.putString("awayName",current.getAwayName());
+                b.putInt("homeID",current.getHome());
+                b.putString("homeName",current.getHomeName());
+                i.putExtras(b);
+                context.startActivity(i);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {return data.size();}
+
+    class MyHolder extends RecyclerView.ViewHolder{
+        RelativeLayout rLayout;
+
+        TextView textAway;
+        TextView textHome;
+        TextView textLocation;
+        TextView textDate;
+
+        // create constructor to get widget reference
+        public MyHolder(View itemView) {
+            super(itemView);
+            rLayout = (RelativeLayout)itemView.findViewById(R.id.SListGame);
+            textAway= (TextView) itemView.findViewById(R.id.awayTeam);
+            textHome= (TextView) itemView.findViewById(R.id.homeTeam);
+            textLocation= (TextView) itemView.findViewById(R.id.location);
+            textDate= (TextView) itemView.findViewById(R.id.date);
+        }
+
+    }
+}
