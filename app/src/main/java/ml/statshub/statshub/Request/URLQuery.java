@@ -20,5 +20,6 @@ public class URLQuery {
 
     public static String URL_SOCCER_GAMES = "http://74.57.129.224:51009/Android/ListSoccerGames.php";
     public static String URL_HOCKEY_GAMES = "http://74.57.129.224:51009/Android/ListHockeyGames.php";
+    public static String URL_SOCCER_NUMBERS_PLAYERS = "http://74.57.129.224:51009/Android/ListSTeamNumber.php";
 
 }

@@ -78,7 +78,6 @@ public class SoccerMarqueur extends AppCompatActivity {
                  games.setHome(json_data.getInt("idHomeTeams"));
                  games.setHomeName(json_data.getString("HomeName"));
                  games.setLocation(json_data.getString("Location"));
-                 //games.setDate(json_data.getString("Time"));
                  String date = json_data.getString("Time");
                  SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA_FRENCH);
                  Date newDate = format.parse(date);

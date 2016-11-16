@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/awayGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visiteur"/>
+
+        <RadioButton
+            android:id="@+id/homeGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Receveur" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/TextBut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="But"
+        android:textSize="40sp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp" />
+
+    <EditText
+        android:id="@+id/editGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="#"
+        android:maxLength="2"
+        android:inputType="number"
+        android:ems="4"
+        android:layout_below="@+id/TextBut"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aides"
+        android:textSize="40sp"
+        android:layout_below="@id/editGoal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:id="@+id/editAssist1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="#"
+        android:maxLength="2"
+        android:inputType="number"
+        android:ems="4"
+        android:layout_below="@+id/textGoal"
+        android:layout_toStartOf="@+id/textGoal" />
+
+    <EditText
+        android:id="@+id/editAssist2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="#"
+        android:maxLength="2"
+        android:inputType="number"
+        android:ems="4"
+        android:layout_below="@+id/textGoal"
+        android:layout_toEndOf="@+id/textGoal" />
+
+    <RadioGroup
+        android:id="@+id/radio2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editAssist1"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <RadioButton
+            android:id="@+id/PPG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Avantage numérique"/>
+
+        <RadioButton
+            android:id="@+id/PKG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Désavantage numérique"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soumettre"
+        android:gravity="center"
+        android:layout_below="@id/radio2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
+
+
+</RelativeLayout>

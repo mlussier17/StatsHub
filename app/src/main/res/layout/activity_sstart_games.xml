@@ -8,13 +8,20 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ml.statshub.statshub.Marqueur.Soccer.SStartGamesActivity">
+    <TextView
+        android:id="@+id/vis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Visiteur"
+        android:textSize="15sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/away"
         android:textSize="15sp"
-        android:maxLength="20"/>
+        android:maxLength="20"
+        android:layout_below="@+id/vis"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,12 +32,20 @@
         android:gravity="center"
         android:layout_centerInParent="true" />
     <TextView
+        android:id="@+id/home1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Receveur"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:textSize="15sp"/>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/home"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
         android:textSize="15sp"
+        android:layout_below="@+id/home1"
         android:maxLength="20"/>
 
     <Button
@@ -38,7 +53,7 @@
         android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buts"
+        android:text="But"
         android:layout_centerHorizontal="true"
         android:onClick="addGoal"/>
 
@@ -46,7 +61,7 @@
         android:id="@+id/penalty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Punitions"
+        android:text="Punition"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:onClick="addPenalty"/>
