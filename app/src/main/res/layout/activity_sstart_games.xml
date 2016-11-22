@@ -64,7 +64,7 @@
         android:text="Carton"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:onClick="addPenalty"/>
+        android:onClick="addCard"/>
 
     <Button
         android:id="@+id/endGame"
