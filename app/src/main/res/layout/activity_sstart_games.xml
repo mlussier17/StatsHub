@@ -58,10 +58,10 @@
         android:onClick="addGoal"/>
 
     <Button
-        android:id="@+id/penalty"
+        android:id="@+id/card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Punition"
+        android:text="Carton"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:onClick="addPenalty"/>
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fin de partie"
-        android:layout_below="@+id/penalty"
+        android:layout_below="@+id/card"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="63dp"
         android:onClick="endOfGame"/>
