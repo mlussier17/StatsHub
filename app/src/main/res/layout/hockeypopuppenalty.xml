@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/awayPenalty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visiteur"/>
+
+        <RadioButton
+            android:id="@+id/homePenalty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Receveur" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/TextBut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Punition"
+        android:textSize="40sp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp" />
+
+    <EditText
+        android:id="@+id/editPenalty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="#"
+        android:maxLength="2"
+        android:inputType="number"
+        android:ems="4"
+        android:layout_below="@+id/TextBut"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/TextNbPenalty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Minutes"
+        android:textSize="40sp"
+        android:layout_below="@+id/editPenalty"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp" />
+
+    <EditText
+        android:id="@+id/editMinutes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="#"
+        android:maxLength="2"
+        android:inputType="number"
+        android:ems="4"
+        android:layout_below="@+id/TextNbPenalty"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soumettre"
+        android:gravity="center"
+        android:layout_below="@id/editMinutes"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
+
+
+</RelativeLayout>

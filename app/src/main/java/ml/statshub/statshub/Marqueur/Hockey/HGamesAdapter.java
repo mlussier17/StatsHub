@@ -53,7 +53,7 @@ public class HGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         myHolder.rLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, SStartGamesActivity.class);
+                Intent i = new Intent(context, HStartGamesActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("id",current.getId());
                 b.putInt("awayID",current.getAway());

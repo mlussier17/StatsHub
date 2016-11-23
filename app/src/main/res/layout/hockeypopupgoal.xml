@@ -18,6 +18,7 @@
             android:id="@+id/awayGoal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="Visiteur"/>
 
         <RadioButton
@@ -49,7 +50,7 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/textGoal"
+        android:id="@+id/textAssist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aides"
@@ -58,16 +59,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"/>
 
+
+
     <EditText
         android:id="@+id/editAssist1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="#"
+        android:layout_centerHorizontal="true"
         android:maxLength="2"
         android:inputType="number"
         android:ems="4"
-        android:layout_below="@+id/textGoal"
-        android:layout_toStartOf="@+id/textGoal" />
+        android:layout_below="@+id/textAssist"
+        android:layout_alignStart="@+id/editGoal" />
 
     <EditText
         android:id="@+id/editAssist2"
@@ -76,19 +80,21 @@
         android:hint="#"
         android:maxLength="2"
         android:inputType="number"
+        android:layout_centerHorizontal="true"
         android:ems="4"
-        android:layout_below="@+id/textGoal"
-        android:layout_toEndOf="@+id/textGoal" />
+        android:layout_below="@+id/editAssist1"
+        android:layout_alignStart="@+id/editAssist1"
+        android:layout_marginTop="13dp" />
 
     <RadioGroup
         android:id="@+id/radio2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editAssist1"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="17dp"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_below="@+id/editAssist2"
+        android:layout_alignParentStart="true">
 
         <RadioButton
             android:id="@+id/PPG"
@@ -103,12 +109,15 @@
             android:text="Désavantage numérique"/>
     </RadioGroup>
 
+
+
     <Button
         android:id="@+id/send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Soumettre"
         android:gravity="center"
+
         android:layout_below="@id/radio2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp" />

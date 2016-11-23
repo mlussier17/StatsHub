@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sstart_games"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="ml.statshub.statshub.Marqueur.Soccer.SStartGamesActivity">
+    <TextView
+        android:id="@+id/vis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Visiteur"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/away"
+        android:textSize="15sp"
+        android:maxLength="20"
+        android:layout_below="@+id/vis"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VS"
+        android:textSize="12sp"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:layout_centerInParent="true" />
+    <TextView
+        android:id="@+id/home1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Receveur"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:textSize="15sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/home"
+        android:layout_alignParentEnd="true"
+        android:textSize="15sp"
+        android:layout_below="@+id/home1"
+        android:maxLength="20"/>
+
+    <Button
+        android:id="@+id/goal"
+        android:layout_marginTop="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="But"
+        android:layout_centerHorizontal="true"
+        android:onClick="addGoal"/>
+
+    <Button
+        android:id="@+id/penalty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Punition"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="addPenalty"/>
+
+    <Button
+        android:id="@+id/endGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fin de partie"
+        android:layout_below="@+id/penalty"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="63dp"
+        android:onClick="endOfGame"/>
+
+</RelativeLayout>
