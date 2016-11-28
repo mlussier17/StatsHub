@@ -27,5 +27,7 @@ public class URLQuery {
     public static String URL_HOCKEY_ADD_GOAL = "http://74.57.129.224:51009/Android/InsertHockeyGoal.php";
     public static String URL_HOCKEY_ADD_ASSIST = "http://74.57.129.224:51009/Android/InsertHockeyAssist.php";
     public static String URL_HOCKEY_ADD_PENALTY = "http://74.57.129.224:51009/Android/InsertHPenalty.php";
+    public static String URL_HOCKEY_END_GAME = "http://74.57.129.224:51009/Android/EndHGames.php";
+    public static String URL_SOCCER_END_GAME = "http://74.57.129.224:51009/Android/EndSGames.php";
 
 }

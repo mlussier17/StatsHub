@@ -65,7 +65,8 @@
         <activity
             android:name=".Marqueur.Soccer.SStartGamesActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Marqueur.Hockey.HStartGamesActivity"></activity>
+        <activity android:name=".Marqueur.Hockey.HStartGamesActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

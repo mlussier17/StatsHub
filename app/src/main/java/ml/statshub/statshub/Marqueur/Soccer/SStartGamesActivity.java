@@ -11,15 +11,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import ml.statshub.statshub.Class.NumbersAvailable;
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
@@ -141,7 +138,40 @@ public class SStartGamesActivity extends AppCompatActivity {
     }
 
     public void endOfGame(View v){
+        NumbersAvailable numeroAway;
+        NumbersAvailable numeroHome;
+        numeroAway = BackgroundGetNumbersAway.numbers;
+        numeroHome = BackgroundGetNumbersHome.numbers;
+        new BackgroundTaskSoccerEndGamePlayers(SStartGamesActivity.bundle.getInt("awayID"), numeroAway).execute();
+        new BackgroundTaskSoccerEndGamePlayers(SStartGamesActivity.bundle.getInt("homeID"), numeroHome).execute();
+    }
+}
 
+class BackgroundTaskSoccerEndGamePlayers extends AsyncTask<Void,Void,String>{
+
+    private String URLQuery;
+    private int teamId;
+    private String jsonString;
+    private HashMap<String,String> hMap = new HashMap<>();
+    NumbersAvailable numero;
+
+    BackgroundTaskSoccerEndGamePlayers(int teamId, NumbersAvailable numero){
+        this.teamId = teamId;
+        this.numero = numero;
+    }
+
+    @Override
+    protected void onPreExecute(){URLQuery = ml.statshub.statshub.Request.URLQuery.URL_SOCCER_END_GAME;}
+
+    @Override
+    protected String doInBackground(Void... params) {
+        for(int i = 0; i < numero.getNumbers().size(); i++) {
+            hMap.put("id", teamId + "");
+            hMap.put("number", numero.getNumbers().get(i) + "");
+            HTTPRequest request = new HTTPRequest();
+            jsonString = request.postQueryToHDB(URLQuery, hMap);
+        }
+        return jsonString;
     }
 }
 

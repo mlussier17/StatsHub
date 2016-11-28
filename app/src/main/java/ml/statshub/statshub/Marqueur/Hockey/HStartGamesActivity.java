@@ -12,19 +12,17 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import ml.statshub.statshub.Class.NumbersAvailable;
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
 
+import static ml.statshub.statshub.R.id.awayResult;
 import static ml.statshub.statshub.Request.URLQuery.URL_HOCKEY_NUMBERS_PLAYERS;
 
 public class HStartGamesActivity extends AppCompatActivity {
@@ -32,6 +30,8 @@ public class HStartGamesActivity extends AppCompatActivity {
     static public Context context;
     private TextView away;
     private TextView home;
+    private TextView awayResultText;
+    private TextView homeResultText;
     public RadioGroup teams;
     static public EditText goal;
     static public EditText penalty;
@@ -43,17 +43,26 @@ public class HStartGamesActivity extends AppCompatActivity {
     public RadioButton ppgGoal;
     public RadioButton pkgGoal;
     public Button sender;
+    public Results results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        results = new Results();
+        results.setAway(0);
+        results.setHome(0);
         setContentView(R.layout.activity_hstart_games);
         context = this.getApplicationContext();
         bundle = getIntent().getExtras();
         away = (TextView)findViewById(R.id.away);
         home = (TextView)findViewById(R.id.home);
+        awayResultText = (TextView)findViewById(awayResult);
+        homeResultText = (TextView)findViewById(R.id.homeResult);
         away.setText(bundle.getString("awayName"));
         home.setText(bundle.getString("homeName"));
+        awayResultText.setText(results.getAway() + "");
+        homeResultText.setText(results.getHome() + "");
+
         new BackgroundGetHockeyNumbersAway().execute();
         new BackgroundGetHockeyNumbersHome().execute();
     }
@@ -95,6 +104,8 @@ public class HStartGamesActivity extends AppCompatActivity {
                                 new BackgroundTaskHockeyPostGoal(HStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(goal.getText().toString()), 0, 1).execute();
                             else
                                 new BackgroundTaskHockeyPostGoal(HStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(goal.getText().toString()), 0, 0).execute();
+                            results.setAway(1);
+                            awayResultText.setText(results.getAway() + "");
                         } else {
                             if (ppgGoal.isChecked())
                                 new BackgroundTaskHockeyPostGoal(HStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(goal.getText().toString()), 1, 0).execute();
@@ -102,6 +113,8 @@ public class HStartGamesActivity extends AppCompatActivity {
                                 new BackgroundTaskHockeyPostGoal(HStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(goal.getText().toString()), 0, 1).execute();
                             else
                                 new BackgroundTaskHockeyPostGoal(HStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(goal.getText().toString()), 0, 0).execute();
+                            results.setHome(1);
+                            homeResultText.setText(results.getHome() + "");
                         }
                     }
                     //Add assist
@@ -146,7 +159,7 @@ public class HStartGamesActivity extends AppCompatActivity {
             if( !(but == numero.getNumbers().get(i))) validate = false;
             else return true;
         }
-        if(!validate)Toast.makeText(this, "Le numéro n'est pas enregistré avec cettre équipe", Toast.LENGTH_SHORT).show();
+        if(!validate)Toast.makeText(this, "Le numéro n'est pas enregistré avec cette équipe", Toast.LENGTH_SHORT).show();
         return validate;
     }
 
@@ -181,7 +194,49 @@ public class HStartGamesActivity extends AppCompatActivity {
     }
 
     public void endOfGame(View v){
+        NumbersAvailable numeroAway;
+        NumbersAvailable numeroHome;
+        numeroAway = BackgroundGetHockeyNumbersAway.numbers;
+        numeroHome = BackgroundGetHockeyNumbersHome.numbers;
+        new BackgroundTaskHockeyEndGamePlayers(HStartGamesActivity.bundle.getInt("awayID"), numeroAway).execute();
+        new BackgroundTaskHockeyEndGamePlayers(HStartGamesActivity.bundle.getInt("homeID"), numeroHome).execute();
 
+    }
+}
+
+class BackgroundTaskHockeyEndGameTeams extends AsyncTask<Void,Void,String>{
+
+    @Override
+    protected String doInBackground(Void... params) {
+        return null;
+    }
+}
+
+class BackgroundTaskHockeyEndGamePlayers extends AsyncTask<Void,Void,String>{
+
+    private String URLQuery;
+    private int teamId;
+    private String jsonString;
+    private HashMap<String,String> hMap = new HashMap<>();
+    NumbersAvailable numero;
+
+    BackgroundTaskHockeyEndGamePlayers(int teamId, NumbersAvailable numero){
+        this.teamId = teamId;
+        this.numero = numero;
+    }
+
+    @Override
+    protected void onPreExecute(){URLQuery = ml.statshub.statshub.Request.URLQuery.URL_HOCKEY_END_GAME;}
+
+    @Override
+    protected String doInBackground(Void... params) {
+        for(int i = 0; i < numero.getNumbers().size(); i++) {
+            hMap.put("id", teamId + "");
+            hMap.put("number", numero.getNumbers().get(i) + "");
+            HTTPRequest request = new HTTPRequest();
+            jsonString = request.postQueryToHDB(URLQuery, hMap);
+        }
+        return jsonString;
     }
 }
 
@@ -286,7 +341,6 @@ class BackgroundTaskHockeyPostPenalty extends AsyncTask<Void,Void,String> {
         Toast.makeText(HStartGamesActivity.context,"Penalité inseré",Toast.LENGTH_SHORT).show();
     }
 }
-
 
 class BackgroundGetHockeyNumbersAway extends AsyncTask<Void,Void,String>{
     private String jsonString;
