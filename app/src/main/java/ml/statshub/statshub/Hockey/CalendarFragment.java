@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.marcohc.robotocalendar.RobotoCalendarView;
 
@@ -33,8 +34,8 @@ public class CalendarFragment extends Fragment implements  RobotoCalendarView.Ro
 
 
     @Override
-    public void onDayClick(Calendar calendar) {
-
+    public void onDayClick(Calendar daySelectedCalendar) {
+        Toast.makeText(HockeyActivity.context, "onDayClick: " + daySelectedCalendar.getTime().getMonth() + " " + daySelectedCalendar.getTime().getDate(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

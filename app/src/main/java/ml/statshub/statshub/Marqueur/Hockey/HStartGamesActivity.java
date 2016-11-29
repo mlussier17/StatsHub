@@ -2,6 +2,7 @@ package ml.statshub.statshub.Marqueur.Hockey;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +45,12 @@ public class HStartGamesActivity extends AppCompatActivity {
     public RadioButton pkgGoal;
     public Button sender;
     public Results results;
+    public TextView awayScore;
+    public TextView homeScore;
+    public RadioButton otCheck;
+    public RadioButton soCheck;
+    public Boolean validateAssist = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +79,8 @@ public class HStartGamesActivity extends AppCompatActivity {
         builder.setContentView(R.layout.hockeypopupgoal);
         teams = (RadioGroup) builder.findViewById(R.id.radioGroup);
         goal = (EditText)builder.findViewById(R.id.editGoal);
+        editAssist1 = (EditText)builder.findViewById(R.id.editAssist1);
+        editAssist2 = (EditText)builder.findViewById(R.id.editAssist2);
         goal.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -81,10 +90,33 @@ public class HStartGamesActivity extends AppCompatActivity {
                 }
             }
         });
+        editAssist1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(editAssist1.getText().length() > 0)
+                        if(Integer.parseInt(editAssist1.getText().toString()) == Integer.parseInt(goal.getText().toString()))
+                            validateAssist = false;
+                }
+            }
+        });
+        editAssist2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(editAssist2.getText().length() > 0) {
+                        if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(goal.getText().toString()))
+                            validateAssist = false;
+                    }
+                    if(editAssist1.getText().length() > 0) {
+                        if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
+                            validateAssist = false;
+                    }
+                }
+            }
+        });
         awayGoal = (RadioButton)builder.findViewById(R.id.awayGoal);
         homeGoal = (RadioButton)builder.findViewById(R.id.homeGoal);
-        editAssist1 = (EditText)builder.findViewById(R.id.editAssist1);
-        editAssist2 = (EditText)builder.findViewById(R.id.editAssist2);
         ppgGoal = (RadioButton)builder.findViewById(R.id.PPG);
         pkgGoal = (RadioButton)builder.findViewById(R.id.PKG);
         sender = (Button)builder.findViewById(R.id.send);
@@ -94,7 +126,15 @@ public class HStartGamesActivity extends AppCompatActivity {
             public void onClick(View v){
                 String assist1 = editAssist1.getText().toString();
                 String assist2 = editAssist2.getText().toString();
-                if(goal.getText().length() > 0) {
+                if(editAssist2.getText().length() > 0) {
+                    if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(goal.getText().toString()))
+                        validateAssist = false;
+                }
+                if(editAssist1.getText().length() > 0) {
+                    if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
+                        validateAssist = false;
+                }
+                if(goal.getText().length() > 0 && validateAssist) {
                     //Add goal
                     if (validate(1)) {
                         if (awayGoal.isChecked()) {
@@ -127,7 +167,7 @@ public class HStartGamesActivity extends AppCompatActivity {
                         }
                     }
                     if (!assist2.isEmpty()) {
-                        if (validate(3)) {
+                        if (validate(4)) {
                             if (awayGoal.isChecked())
                                 new BackgroundTaskHockeyPostAssist(HStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(editAssist2.getText().toString())).execute();
                             else
@@ -135,8 +175,8 @@ public class HStartGamesActivity extends AppCompatActivity {
                         }
                     }
                 }
-                else Toast.makeText(HStartGamesActivity.context,"Le but doit avoir un numéro", Toast.LENGTH_SHORT).show();
-
+                else Toast.makeText(HStartGamesActivity.context,"Le but est soit vide ou une répétition de chiffre", Toast.LENGTH_SHORT).show();
+                validateAssist = true;
                 builder.dismiss();
             }
         });
@@ -145,13 +185,16 @@ public class HStartGamesActivity extends AppCompatActivity {
 
     public Boolean validate(int id){
         int but;
-    Boolean validate = true;
+        Boolean validate = true;
+
         if(id == 1)
             but = Integer.parseInt(goal.getText().toString());
         else if(id == 2)
             but = Integer.parseInt(penalty.getText().toString());
-        else
+        else if (id == 3)
             but = Integer.parseInt(editAssist1.getText().toString());
+        else
+            but = Integer.parseInt(editAssist2.getText().toString());
 
         NumbersAvailable numero;
         numero = homeGoal.isChecked()? BackgroundGetHockeyNumbersHome.numbers: BackgroundGetHockeyNumbersAway.numbers;
@@ -194,21 +237,109 @@ public class HStartGamesActivity extends AppCompatActivity {
     }
 
     public void endOfGame(View v){
-        NumbersAvailable numeroAway;
-        NumbersAvailable numeroHome;
+        final NumbersAvailable numeroAway;
+        final NumbersAvailable numeroHome;
         numeroAway = BackgroundGetHockeyNumbersAway.numbers;
         numeroHome = BackgroundGetHockeyNumbersHome.numbers;
-        new BackgroundTaskHockeyEndGamePlayers(HStartGamesActivity.bundle.getInt("awayID"), numeroAway).execute();
-        new BackgroundTaskHockeyEndGamePlayers(HStartGamesActivity.bundle.getInt("homeID"), numeroHome).execute();
+
+        final Dialog builder1 = new Dialog(this);
+        builder1.setContentView(R.layout.hockeypopupend);
+        awayScore = (TextView)builder1.findViewById(R.id.editAwayResult);
+        homeScore= (TextView)builder1.findViewById(R.id.editHomeResult);
+        awayGoal = (RadioButton)builder1.findViewById(R.id.awayGoal);
+        homeGoal = (RadioButton)builder1.findViewById(R.id.homeGoal);
+        otCheck = (RadioButton)builder1.findViewById(R.id.OT);
+        soCheck= (RadioButton)builder1.findViewById(R.id.SO);
+        sender = (Button)builder1.findViewById(R.id.send);
+        awayScore.setText(results.getAway() + "");
+        homeScore.setText(results.getHome() + "");
+        awayGoal.setEnabled(false);
+        homeGoal.setEnabled(false);
+        if(results.getAway() > results.getHome())awayGoal.setChecked(true);
+        else homeGoal.setChecked(true);
+
+        sender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean validate = false;
+                new BackgroundTaskHockeyEndGamePlayers(HStartGamesActivity.bundle.getInt("awayID"), numeroAway).execute();
+                new BackgroundTaskHockeyEndGamePlayers(HStartGamesActivity.bundle.getInt("homeID"), numeroHome).execute();
+                if(awayGoal.isChecked())
+                    if (Integer.parseInt(awayScore.getText().toString()) > Integer.parseInt(homeScore.getText().toString()) && Integer.parseInt(awayScore.getText().toString()) > 0)validate = true;
+                if(homeGoal.isChecked())
+                    if (Integer.parseInt(awayScore.getText().toString()) < Integer.parseInt(homeScore.getText().toString()) && Integer.parseInt(homeScore.getText().toString()) > 0)validate = true;
+
+                if(awayScore.getText().length() > 0 && homeScore.getText().length() > 0 && validate){
+                    //Away victory
+                    if(awayGoal.isChecked()){
+                        new BackgroundTaskHockeyEndGameTeams(HStartGamesActivity.bundle.getInt("id"),HStartGamesActivity.bundle.getInt("awayID"),1,0,0,0,Integer.parseInt(homeScore.getText().toString())).execute();
+                        if(otCheck.isChecked())new BackgroundTaskHockeyEndGameTeams(HStartGamesActivity.bundle.getInt("id"),HStartGamesActivity.bundle.getInt("homeID"),0,0,1,0,Integer.parseInt(awayScore.getText().toString())).execute();
+                        else if (soCheck.isChecked())new BackgroundTaskHockeyEndGameTeams(HStartGamesActivity.bundle.getInt("id"),HStartGamesActivity.bundle.getInt("homeID"),0,0,0,1,Integer.parseInt(awayScore.getText().toString())).execute();
+                        else new BackgroundTaskHockeyEndGameTeams(HStartGamesActivity.bundle.getInt("id"),HStartGamesActivity.bundle.getInt("homeID"),0,1,0,0,Integer.parseInt(awayScore.getText().toString())).execute();
+                    }
+                    //Home victory
+                    else{
+                        new BackgroundTaskHockeyEndGameTeams(HStartGamesActivity.bundle.getInt("id"),HStartGamesActivity.bundle.getInt("homeID"),1,0,0,0,Integer.parseInt(awayScore.getText().toString())).execute();
+                        if(otCheck.isChecked())new BackgroundTaskHockeyEndGameTeams(HStartGamesActivity.bundle.getInt("id"),HStartGamesActivity.bundle.getInt("awayID"),0,0,1,0,Integer.parseInt(homeScore.getText().toString())).execute();
+                        else if (soCheck.isChecked())new BackgroundTaskHockeyEndGameTeams(HStartGamesActivity.bundle.getInt("id"),HStartGamesActivity.bundle.getInt("awayID"),0,0,0,1,Integer.parseInt(homeScore.getText().toString())).execute();
+                        else new BackgroundTaskHockeyEndGameTeams(HStartGamesActivity.bundle.getInt("id"),HStartGamesActivity.bundle.getInt("awayID"),0,1,0,0,Integer.parseInt(homeScore.getText().toString())).execute();
+                    }
+                    startActivity(new Intent(HStartGamesActivity.context, HockeyMarqueur.class));
+                    finish();
+                }
+                else Toast.makeText(HStartGamesActivity.context,"Le score final est invalide",Toast.LENGTH_SHORT).show();
+                builder1.dismiss();
+
+            }
+
+        });
+        builder1.show();
+
 
     }
+
+
 }
 
 class BackgroundTaskHockeyEndGameTeams extends AsyncTask<Void,Void,String>{
+    private int id;
+    private int gameId;
+    private String URLQuery;
+    private HashMap<String,String> hMap = new HashMap<>();
+    private int win;
+    private int loses;
+    private int otloses;
+    private int soloses;
+    private int ga;
+    private String jsonString;
+
+
+    BackgroundTaskHockeyEndGameTeams(int gameId,int id, int wins, int loses, int otloses, int soloses, int ga){
+        this.gameId = gameId;
+        this.id = id;
+        this.win = wins;
+        this.loses = loses;
+        this.otloses = otloses;
+        this.soloses = soloses;
+        this.ga = ga;
+    }
+
+    @Override
+    protected void onPreExecute(){URLQuery = ml.statshub.statshub.Request.URLQuery.URL_HOCKEY_END_GAME;}
 
     @Override
     protected String doInBackground(Void... params) {
-        return null;
+        hMap.put("id",id + "");
+        hMap.put("win",win + "");
+        hMap.put("loses",loses + "");
+        hMap.put("otloses",otloses+ "");
+        hMap.put("soloses",soloses + "");
+        hMap.put("ga",ga + "");
+        hMap.put("gameId",gameId + "");
+        HTTPRequest request = new HTTPRequest();
+        jsonString = request.postQueryToHDB(URLQuery,hMap);
+
+        return jsonString;
     }
 }
 
@@ -226,7 +357,7 @@ class BackgroundTaskHockeyEndGamePlayers extends AsyncTask<Void,Void,String>{
     }
 
     @Override
-    protected void onPreExecute(){URLQuery = ml.statshub.statshub.Request.URLQuery.URL_HOCKEY_END_GAME;}
+    protected void onPreExecute(){URLQuery = ml.statshub.statshub.Request.URLQuery.URL_HOCKEY_END_PLAYERS;}
 
     @Override
     protected String doInBackground(Void... params) {

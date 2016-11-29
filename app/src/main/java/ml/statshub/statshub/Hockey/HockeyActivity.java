@@ -1,5 +1,6 @@
 package ml.statshub.statshub.Hockey;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,10 +16,12 @@ import ml.statshub.statshub.R;
 
 public class HockeyActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
+    static public Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getApplicationContext();
         setContentView(R.layout.activity_hockey);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

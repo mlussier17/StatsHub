@@ -82,6 +82,7 @@ public class SoccerMarqueur extends AppCompatActivity {
                  SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CANADA_FRENCH);
                  Date newDate = format.parse(date);
                  games.setDate(format.format(newDate));
+                 games.setEnded(json_data.getInt("IsEnded"));
                  soccerGames.add(games);
              }
              gAdapter = new SGamesAdapter(c,soccerGames);

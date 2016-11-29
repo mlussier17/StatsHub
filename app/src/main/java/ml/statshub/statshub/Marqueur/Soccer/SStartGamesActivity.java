@@ -1,6 +1,8 @@
 package ml.statshub.statshub.Marqueur.Soccer;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,13 +20,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import ml.statshub.statshub.Class.NumbersAvailable;
+import ml.statshub.statshub.Marqueur.Hockey.Results;
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
 
+import static ml.statshub.statshub.R.id.awayResult;
 import static ml.statshub.statshub.Request.URLQuery.URL_SOCCER_NUMBERS_PLAYERS;
 
 public class SStartGamesActivity extends AppCompatActivity {
     static public Bundle bundle;
+    static public Context context;
     private TextView away;
     private TextView home;
     public RadioGroup teams;
@@ -35,18 +40,31 @@ public class SStartGamesActivity extends AppCompatActivity {
     public RadioButton yellowCard;
     public RadioButton redCard;
     public Button sender;
+    public TextView awayScore;
+    public TextView homeScore;
+    public Results results;
+    private TextView awayResultText;
+    private TextView homeResultText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getApplicationContext();
         setContentView(R.layout.activity_sstart_games);
+        results = new Results();
+        results.setAway(0);
+        results.setHome(0);
         bundle = getIntent().getExtras();
         away = (TextView)findViewById(R.id.away);
         home = (TextView)findViewById(R.id.home);
         away.setText(bundle.getString("awayName"));
         home.setText(bundle.getString("homeName"));
+        awayResultText = (TextView)findViewById(awayResult);
+        homeResultText = (TextView)findViewById(R.id.homeResult);
         new BackgroundGetNumbersAway().execute();
         new BackgroundGetNumbersHome().execute();
+        awayResultText.setText(results.getAway() + "");
+        homeResultText.setText(results.getHome() + "");
     }
 
     public void addGoal(View v){
@@ -63,14 +81,23 @@ public class SStartGamesActivity extends AppCompatActivity {
         sender.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if(validate(1)){
-                    Toast.makeText(SStartGamesActivity.this,"Good result",Toast.LENGTH_SHORT).show();
-                    if (awayGoal.isChecked())new BackgroundTaskSoccerPostGoal(SStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(SStartGamesActivity.goal.getText().toString())).execute();
-                    else new BackgroundTaskSoccerPostGoal(SStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(SStartGamesActivity.goal.getText().toString())).execute();
+                if(goal.getText().length() > 0) {
+                    if (validate(1)) {
+                        Toast.makeText(SStartGamesActivity.this, "Good result", Toast.LENGTH_SHORT).show();
+                        if (awayGoal.isChecked()) {
+                            new BackgroundTaskSoccerPostGoal(SStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(SStartGamesActivity.goal.getText().toString())).execute();
+                            results.setAway(1);
+                            awayResultText.setText(results.getAway() + "");
+                        } else {
+                            new BackgroundTaskSoccerPostGoal(SStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(SStartGamesActivity.goal.getText().toString())).execute();
+                            results.setHome(1);
+                            homeResultText.setText(results.getHome() + "");
+                        }
+                    }
                 }
+                else Toast.makeText(SStartGamesActivity.context,"Le but est vide", Toast.LENGTH_SHORT).show();
 
                 builder.dismiss();
-
             }
         });
         builder.show();
@@ -113,21 +140,23 @@ public class SStartGamesActivity extends AppCompatActivity {
         sender.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if(validate(2)){
-                    Toast.makeText(SStartGamesActivity.this,"Good result",Toast.LENGTH_SHORT).show();
-                    if (awayGoal.isChecked()){
-                        if(yellowCard.isChecked())
-                            new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()),"yellow").execute();
-                        else
-                            new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()),"red").execute();
-                    }
-                    else {
-                        if(yellowCard.isChecked())
-                            new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()),"yellow").execute();
-                        else
-                            new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()),"red").execute();
+                if(card.getText().length() > 0) {
+                    if (validate(2)) {
+                        Toast.makeText(SStartGamesActivity.this, "Good result", Toast.LENGTH_SHORT).show();
+                        if (awayGoal.isChecked()) {
+                            if (yellowCard.isChecked())
+                                new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()), "yellow").execute();
+                            else
+                                new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()), "red").execute();
+                        } else {
+                            if (yellowCard.isChecked())
+                                new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()), "yellow").execute();
+                            else
+                                new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()), "red").execute();
+                        }
                     }
                 }
+                else Toast.makeText(SStartGamesActivity.context,"Le carton est vide", Toast.LENGTH_SHORT).show();
 
                 builder.dismiss();
 
@@ -138,12 +167,105 @@ public class SStartGamesActivity extends AppCompatActivity {
     }
 
     public void endOfGame(View v){
-        NumbersAvailable numeroAway;
-        NumbersAvailable numeroHome;
+
+
+        final NumbersAvailable numeroAway;
+        final NumbersAvailable numeroHome;
         numeroAway = BackgroundGetNumbersAway.numbers;
         numeroHome = BackgroundGetNumbersHome.numbers;
-        new BackgroundTaskSoccerEndGamePlayers(SStartGamesActivity.bundle.getInt("awayID"), numeroAway).execute();
-        new BackgroundTaskSoccerEndGamePlayers(SStartGamesActivity.bundle.getInt("homeID"), numeroHome).execute();
+
+        final Dialog builder1 = new Dialog(this);
+        builder1.setContentView(R.layout.soccerpopupend);
+        awayScore = (TextView)builder1.findViewById(R.id.editAwayResult);
+        homeScore= (TextView)builder1.findViewById(R.id.editHomeResult);
+        awayGoal = (RadioButton)builder1.findViewById(R.id.awayGoal);
+        homeGoal = (RadioButton)builder1.findViewById(R.id.homeGoal);
+        sender = (Button)builder1.findViewById(R.id.send);
+        awayScore.setText(results.getAway() + "");
+        homeScore.setText(results.getHome() + "");
+        if(results.getAway() > results.getHome())awayGoal.setChecked(true);
+        else if(results.getAway() < results.getHome()) homeGoal.setChecked(true);
+        else{
+            awayGoal.setChecked(false);
+            homeGoal.setChecked(false);
+        }
+        awayGoal.setEnabled(false);
+        homeGoal.setEnabled(false);
+
+
+        sender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(awayScore.getText().length() > 0 && homeScore.getText().length() > 0){
+                    //Away victory
+                    if(awayGoal.isChecked()){
+                        new BackgroundTaskSoccerEndGameTeams(SStartGamesActivity.bundle.getInt("id"),SStartGamesActivity.bundle.getInt("awayID"),1,0,0,Integer.parseInt(homeScore.getText().toString())).execute();
+                        new BackgroundTaskSoccerEndGameTeams(SStartGamesActivity.bundle.getInt("id"),SStartGamesActivity.bundle.getInt("homeID"),0,1,0,Integer.parseInt(awayScore.getText().toString())).execute();
+                    }
+                    //Home victory
+                    else if (homeGoal.isChecked()){
+                        new BackgroundTaskSoccerEndGameTeams(SStartGamesActivity.bundle.getInt("id"),SStartGamesActivity.bundle.getInt("homeID"),1,0,0,Integer.parseInt(awayScore.getText().toString())).execute();
+                        new BackgroundTaskSoccerEndGameTeams(SStartGamesActivity.bundle.getInt("id"),SStartGamesActivity.bundle.getInt("awayID"),0,1,0,Integer.parseInt(homeScore.getText().toString())).execute();
+                    }
+                    //Ties
+                    else{
+                        new BackgroundTaskSoccerEndGameTeams(SStartGamesActivity.bundle.getInt("id"),SStartGamesActivity.bundle.getInt("homeID"),0,0,1,Integer.parseInt(awayScore.getText().toString())).execute();
+                        new BackgroundTaskSoccerEndGameTeams(SStartGamesActivity.bundle.getInt("id"),SStartGamesActivity.bundle.getInt("awayID"),0,0,1,Integer.parseInt(homeScore.getText().toString())).execute();
+                    }
+                    new BackgroundTaskSoccerEndGamePlayers(SStartGamesActivity.bundle.getInt("awayID"), numeroAway).execute();
+                    new BackgroundTaskSoccerEndGamePlayers(SStartGamesActivity.bundle.getInt("homeID"), numeroHome).execute();
+                    startActivity(new Intent(SStartGamesActivity.context, SoccerMarqueur.class));
+                    finish();
+                }
+                else Toast.makeText(SStartGamesActivity.context,"Le score final est invalide",Toast.LENGTH_SHORT).show();
+                builder1.dismiss();
+
+            }
+
+        });
+        builder1.show();
+    }
+}
+
+class BackgroundTaskSoccerEndGameTeams extends AsyncTask<Void,Void,String>{
+    private int id;
+    private int gameId;
+    private String URLQuery;
+    private HashMap<String,String> hMap = new HashMap<>();
+    private int win;
+    private int loses;
+    private int ties;
+    private int soloses;
+    private int ga;
+    private String jsonString;
+
+
+    BackgroundTaskSoccerEndGameTeams(int gameId,int id, int wins, int loses, int ties, int ga){
+        this.gameId = gameId;
+        this.id = id;
+        this.win = wins;
+        this.loses = loses;
+        this.ties = ties;
+        this.ga = ga;
+    }
+
+    @Override
+    protected void onPreExecute(){URLQuery = ml.statshub.statshub.Request.URLQuery.URL_SOCCER_END_GAME;}
+
+    @Override
+    protected String doInBackground(Void... params) {
+        hMap.put("id",id + "");
+        hMap.put("win",win + "");
+        hMap.put("loses",loses + "");
+        hMap.put("ties",ties+ "");
+        hMap.put("ga",ga + "");
+        hMap.put("gameId",gameId + "");
+        HTTPRequest request = new HTTPRequest();
+        jsonString = request.postQueryToHDB(URLQuery,hMap);
+
+        return jsonString;
     }
 }
 
@@ -161,7 +283,7 @@ class BackgroundTaskSoccerEndGamePlayers extends AsyncTask<Void,Void,String>{
     }
 
     @Override
-    protected void onPreExecute(){URLQuery = ml.statshub.statshub.Request.URLQuery.URL_SOCCER_END_GAME;}
+    protected void onPreExecute(){URLQuery = ml.statshub.statshub.Request.URLQuery.URL_SOCCER_END_PLAYERS;}
 
     @Override
     protected String doInBackground(Void... params) {

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:text="Vainqueur"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"/>
+
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_below="@+id/title"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp">
+
+        <RadioButton
+            android:id="@+id/awayGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Visiteur"/>
+
+        <RadioButton
+            android:id="@+id/homeGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Receveur" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/editHomeResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="30sp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignEnd="@+id/send" />
+
+    <TextView
+        android:id="@+id/editAwayResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:text="0"
+        android:textSize="30sp"
+        android:layout_marginEnd="45dp"
+        android:layout_above="@+id/radio2"
+        android:layout_alignStart="@+id/send" />
+
+    <RadioGroup
+        android:id="@+id/radio2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@+id/editHomeResult"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="26dp">
+
+        <RadioButton
+            android:id="@+id/OT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prolongation"/>
+
+        <RadioButton
+            android:id="@+id/SO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fusillade"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soumettre"
+        android:gravity="center"
+
+        android:layout_below="@+id/radio2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp" />
+
+
+
+
+</RelativeLayout>

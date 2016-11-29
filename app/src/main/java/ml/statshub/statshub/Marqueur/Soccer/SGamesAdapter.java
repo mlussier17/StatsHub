@@ -9,10 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import java.util.Collections;
 import java.util.List;
-
 import ml.statshub.statshub.Class.Games;
 import ml.statshub.statshub.R;
 
@@ -52,15 +51,18 @@ public class SGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         myHolder.rLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, SStartGamesActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("id",current.getId());
-                b.putInt("awayID",current.getAway());
-                b.putString("awayName",current.getAwayName());
-                b.putInt("homeID",current.getHome());
-                b.putString("homeName",current.getHomeName());
-                i.putExtras(b);
-                context.startActivity(i);
+                if(current.getEnded() == 0) {
+                    Intent i = new Intent(context, SStartGamesActivity.class);
+                    Bundle b = new Bundle();
+                    b.putInt("id",current.getId());
+                    b.putInt("awayID",current.getAway());
+                    b.putString("awayName",current.getAwayName());
+                    b.putInt("homeID",current.getHome());
+                    b.putString("homeName",current.getHomeName());
+                    i.putExtras(b);
+                    context.startActivity(i);
+                }
+                else Toast.makeText(context,"La partie est terminée",Toast.LENGTH_SHORT).show();
             }
         });
     }
