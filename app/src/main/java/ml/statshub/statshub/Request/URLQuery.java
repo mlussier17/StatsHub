@@ -31,5 +31,7 @@ public class URLQuery {
     public static String URL_SOCCER_END_PLAYERS = "http://74.57.129.224:51009/Android/EndSGames.php";
     public static String URL_HOCKEY_END_GAME = "http://74.57.129.224:51009/Android/EndHGame.php";
     public static String URL_SOCCER_END_GAME = "http://74.57.129.224:51009/Android/EndSGame.php";
+    public static String URL_HOCKEY_GET_GAME = "http://74.57.129.224:51009/Android/GetHGamesFromDate.php";
+    public static String URL_SOCCER_GET_GAME = "http://74.57.129.224:51009/Android/GetSGameFromDate.php";
 
 }

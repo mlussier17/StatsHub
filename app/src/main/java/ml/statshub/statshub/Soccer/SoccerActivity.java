@@ -1,5 +1,6 @@
 package ml.statshub.statshub.Soccer;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,10 +19,12 @@ import ml.statshub.statshub.Soccer.SLeaguesLeadersFragment;
 
 public class SoccerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    static public Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getApplicationContext();
         setContentView(R.layout.activity_soccer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
