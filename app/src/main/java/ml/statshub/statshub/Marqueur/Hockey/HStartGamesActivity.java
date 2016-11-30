@@ -107,11 +107,12 @@ public class HStartGamesActivity extends AppCompatActivity {
                     if(editAssist2.getText().length() > 0) {
                         if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(goal.getText().toString()))
                             validateAssist = false;
+                        if(editAssist1.getText().length() > 0) {
+                            if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
+                                validateAssist = false;
+                        }
                     }
-                    if(editAssist1.getText().length() > 0) {
-                        if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
-                            validateAssist = false;
-                    }
+
                 }
             }
         });
@@ -129,9 +130,11 @@ public class HStartGamesActivity extends AppCompatActivity {
                 if(editAssist2.getText().length() > 0) {
                     if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(goal.getText().toString()))
                         validateAssist = false;
+                    if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
+                        validateAssist = false;
                 }
                 if(editAssist1.getText().length() > 0) {
-                    if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
+                    if (Integer.parseInt(goal.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
                         validateAssist = false;
                 }
                 if(goal.getText().length() > 0 && validateAssist) {
@@ -156,22 +159,23 @@ public class HStartGamesActivity extends AppCompatActivity {
                             results.setHome(1);
                             homeResultText.setText(results.getHome() + "");
                         }
-                    }
-                    //Add assist
-                    if (!assist1.isEmpty()) {
-                        if (validate(3)) {
-                            if (awayGoal.isChecked())
-                                new BackgroundTaskHockeyPostAssist(HStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(editAssist1.getText().toString())).execute();
-                            else
-                                new BackgroundTaskHockeyPostAssist(HStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(editAssist1.getText().toString())).execute();
+
+                        //Add assist
+                        if (!assist1.isEmpty()) {
+                            if (validate(3)) {
+                                if (awayGoal.isChecked())
+                                    new BackgroundTaskHockeyPostAssist(HStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(editAssist1.getText().toString())).execute();
+                                else
+                                    new BackgroundTaskHockeyPostAssist(HStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(editAssist1.getText().toString())).execute();
+                            }
                         }
-                    }
-                    if (!assist2.isEmpty()) {
-                        if (validate(4)) {
-                            if (awayGoal.isChecked())
-                                new BackgroundTaskHockeyPostAssist(HStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(editAssist2.getText().toString())).execute();
-                            else
-                                new BackgroundTaskHockeyPostAssist(HStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(editAssist2.getText().toString())).execute();
+                        if (!assist2.isEmpty()) {
+                            if (validate(4)) {
+                                if (awayGoal.isChecked())
+                                    new BackgroundTaskHockeyPostAssist(HStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(editAssist2.getText().toString())).execute();
+                                else
+                                    new BackgroundTaskHockeyPostAssist(HStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(editAssist2.getText().toString())).execute();
+                            }
                         }
                     }
                 }
@@ -198,6 +202,7 @@ public class HStartGamesActivity extends AppCompatActivity {
 
         NumbersAvailable numero;
         numero = homeGoal.isChecked()? BackgroundGetHockeyNumbersHome.numbers: BackgroundGetHockeyNumbersAway.numbers;
+        if(numero.getNumbers().size() == 0) validate = false;
         for (int i = 0; i < numero.getNumbers().size();i++){
             if( !(but == numero.getNumbers().get(i))) validate = false;
             else return true;
