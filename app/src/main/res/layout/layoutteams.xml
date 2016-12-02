@@ -1,91 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TableRow>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="15sp"
                     android:id="@+id/teamName"
-                    android:layout_weight="0.6"
+                    android:maxLength="17"
+                    android:layout_marginEnd="9dp"
                     />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/teamGP"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="0.05"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="end"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/teamWins"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="0.05"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="end"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/teamLoses"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="0.05"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="end"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/teamOT"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="0.05"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="end"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/teamSO"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="0.05"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="end"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/teamPts"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="0.05"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="end"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/teamGF"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="0.05"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="end"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/teamGA"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="0.05"
+                    android:gravity="end"
                     />
             </TableRow>
         </TableLayout>
 
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

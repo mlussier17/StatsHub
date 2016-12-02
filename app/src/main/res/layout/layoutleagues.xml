@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textName"
+        android:maxLength="50"
         android:layout_marginLeft="5dp"
         android:layout_weight="75"
         />
