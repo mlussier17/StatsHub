@@ -40,8 +40,7 @@ public class PlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         // Get current position of item in recyclerview to bind data and assign values from list
         PlayersTeamsAdapter.MyHolder myHolder= (PlayersTeamsAdapter.MyHolder) holder;
         final Players current = data.get(position);
-        myHolder.textName.setText(current.getName());
-        myHolder.textFName.setText(current.getFName());
+        myHolder.textName.setText(current.getName() + " " + current.getFName());
         myHolder.textNumber.setText(current.getNumber() + "");
         myHolder.textGP.setText(current.getGP() + "");
         myHolder.textG.setText(current.getGoals() + "");
@@ -73,7 +72,6 @@ public class PlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public MyHolder(View itemView) {
             super(itemView);
             textName= (TextView) itemView.findViewById(R.id.playerName);
-            textFName= (TextView) itemView.findViewById(R.id.playerFName);
             textNumber= (TextView) itemView.findViewById(R.id.playerNumber);
             textGP= (TextView) itemView.findViewById(R.id.playerGP);
             textG= (TextView) itemView.findViewById(R.id.playerGoals);

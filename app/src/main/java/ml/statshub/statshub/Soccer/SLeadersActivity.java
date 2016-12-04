@@ -83,7 +83,6 @@ class BackgroundTask10 extends AsyncTask<Void,Void,String> {
                 players.setNumber(json_data.getInt("Number"));
                 players.setGP(json_data.getInt("NbGP"));
                 players.setGoals(json_data.getInt("NbGoals"));
-                players.setAssists(json_data.getInt("NbAssists"));
                 players.setYC(json_data.getInt("NbYellowCards"));
                 players.setRC(json_data.getInt("NbRedCards"));
                 playersList.add(players);

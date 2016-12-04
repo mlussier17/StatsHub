@@ -28,7 +28,7 @@ public class STeamsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bundle = getIntent().getExtras();
-        setContentView(R.layout.activity_teams);
+        setContentView(R.layout.activity_steams);
         TextView test;
         test = (TextView)findViewById(R.id.showTeams);
         test.setText(bundle.getString("name"));

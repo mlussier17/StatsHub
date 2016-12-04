@@ -4,10 +4,6 @@
     android:id="@+id/activity_teams"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ml.statshub.statshub.Hockey.TeamsActivity">
 
     <TextView
@@ -34,73 +30,54 @@
             android:layout_height="wrap_content">
             <TableRow>
                 <TextView
-                    android:layout_width="1000dp"
+                    android:layout_width="190dp"
                     android:layout_height="wrap_content"
                     android:text="Nom"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_weight="25"/>
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PJ"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:gravity="right" />
+                    android:layout_marginEnd="12dp"
+                    android:gravity="end" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="V"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:gravity="right" />
+                    android:layout_marginEnd="18dp"
+                    android:gravity="end" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="D"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:gravity="right" />
-
+                    android:layout_marginEnd="8dp"
+                    android:gravity="end" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DP"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:gravity="right" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DF"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:gravity="right" />
+                    android:text="ÉGA"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="end" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PTS"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:gravity="right" />
+                    android:layout_marginEnd="4dp"
+                    android:gravity="end" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="BP"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:gravity="right" />
+                    android:layout_marginEnd="4dp"
+                    android:gravity="end" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="BC"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:gravity="right" />
+                    android:gravity="end" />
             </TableRow>
         </TableLayout>
     </LinearLayout>

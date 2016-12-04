@@ -40,15 +40,12 @@ public class SPlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.View
         // Get current position of item in recyclerview to bind data and assign values from list
         SPlayersTeamsAdapter.MyHolder myHolder= (SPlayersTeamsAdapter.MyHolder) holder;
         final Players current = data.get(position);
-        myHolder.textName.setText(current.getName());
-        myHolder.textFName.setText(current.getFName());
+        myHolder.textName.setText(current.getName() + " " + current.getFName());
         myHolder.textNumber.setText((current.getNumber() + ""));
         myHolder.textGP.setText((current.getGP() + ""));
         myHolder.textG.setText((current.getGoals() + ""));
-        myHolder.textA.setText((current.getAssists() + ""));
-        myHolder.textPts.setText((current.getYC() + ""));
-        myHolder.textYC.setText((current.getRC() + ""));
-        myHolder.textRC.setText((current.getPKG() + ""));
+        myHolder.textYC.setText((current.getYC() + ""));
+        myHolder.textRC.setText((current.getRC() + ""));
     }
 
     @Override
@@ -63,8 +60,6 @@ public class SPlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.View
         TextView textNumber;
         TextView textGP;
         TextView textG;
-        TextView textA;
-        TextView textPts;
         TextView textYC;
         TextView textRC;
 
@@ -72,12 +67,9 @@ public class SPlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.View
         public MyHolder(View itemView) {
             super(itemView);
             textName= (TextView) itemView.findViewById(R.id.playerName);
-            textFName= (TextView) itemView.findViewById(R.id.playerFName);
             textNumber= (TextView) itemView.findViewById(R.id.playerNumber);
             textGP= (TextView) itemView.findViewById(R.id.playerGP);
             textG= (TextView) itemView.findViewById(R.id.playerGoals);
-            textA= (TextView) itemView.findViewById(R.id.playerAssists);
-            textPts= (TextView) itemView.findViewById(R.id.playerPoints);
             textYC = (TextView) itemView.findViewById(R.id.playerYC);
             textRC= (TextView) itemView.findViewById(R.id.playerRC);
         }

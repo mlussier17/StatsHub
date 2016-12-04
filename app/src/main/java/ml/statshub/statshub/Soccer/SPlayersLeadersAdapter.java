@@ -36,13 +36,11 @@ public class SPlayersLeadersAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         // Get current position of item in recyclerview to bind data and assign values from list
         MyHolder myHolder= (MyHolder) holder;
         final Players current = data.get(position);
-        myHolder.textName.setText(current.getName());
-        myHolder.textFName.setText(current.getFName());
+        myHolder.textName.setText(current.getName() + " " + current.getFName());
         myHolder.textTeam.setText(current.getTeam());
         myHolder.textNumber.setText(current.getNumber() + "");
         myHolder.textGP.setText(current.getGP() + "");
         myHolder.textG.setText(current.getGoals() + "");
-        myHolder.textA.setText(current.getAssists() + "");
         myHolder.textYC.setText(current.getYC() + "");
         myHolder.textRC.setText(current.getRC() + "");
     }
@@ -55,24 +53,20 @@ public class SPlayersLeadersAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     class MyHolder extends RecyclerView.ViewHolder{
 
         TextView textName;
-        TextView textFName;
         TextView textNumber;
         TextView textTeam;
         TextView textGP;
         TextView textG;
-        TextView textA;
         TextView textYC;
         TextView textRC;
 
         public MyHolder(View itemView) {
             super(itemView);
             textName= (TextView) itemView.findViewById(R.id.playerName);
-            textFName= (TextView) itemView.findViewById(R.id.playerFName);
             textTeam= (TextView) itemView.findViewById(R.id.playerTeam);
             textNumber= (TextView) itemView.findViewById(R.id.playerNumber);
             textGP= (TextView) itemView.findViewById(R.id.playerGP);
             textG= (TextView) itemView.findViewById(R.id.playerGoals);
-            textA= (TextView) itemView.findViewById(R.id.playerAssists);
             textYC= (TextView) itemView.findViewById(R.id.playerYC);
             textRC= (TextView) itemView.findViewById(R.id.playerRC);
         }

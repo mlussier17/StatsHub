@@ -32,7 +32,7 @@ public class STeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.layoutteams, parent,false);
+        View view=inflater.inflate(R.layout.layoutsteams, parent,false);
         return new STeamsAdapter.MyHolder(view);
     }
 
@@ -48,8 +48,8 @@ public class STeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         myHolder.textLoses.setText(current.getLoses() + "");
         myHolder.textOTLoses.setText(current.getTies() + "");
         myHolder.textPoints.setText(current.getPoints() + "");
-        myHolder.textGF.setText(current.getYC() + "");
-        myHolder.textGA.setText(current.getRC() + "");
+        myHolder.textGF.setText(current.getGF() + "");
+        myHolder.textGA.setText(current.getGA() + "");
 
         myHolder.textName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,12 +77,9 @@ public class STeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TextView textWins;
         TextView textLoses;
         TextView textOTLoses;
-        TextView textSOLoses;
         TextView textPoints;
         TextView textGF;
         TextView textGA;
-
-        TextView textSize;
 
         // create constructor to get widget reference
         public MyHolder(View itemView) {
@@ -91,8 +88,7 @@ public class STeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             textWins= (TextView) itemView.findViewById(R.id.teamWins);
             textGP= (TextView) itemView.findViewById(R.id.teamGP);
             textLoses= (TextView) itemView.findViewById(R.id.teamLoses);
-            textOTLoses= (TextView) itemView.findViewById(R.id.teamOT);
-            textSOLoses= (TextView) itemView.findViewById(R.id.teamSO);
+            textOTLoses= (TextView) itemView.findViewById(R.id.teamTies);
             textPoints= (TextView) itemView.findViewById(R.id.teamPts);
             textGF= (TextView) itemView.findViewById(R.id.teamGF);
             textGA= (TextView) itemView.findViewById(R.id.teamGA);
