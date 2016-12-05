@@ -55,23 +55,53 @@ public class HStartGamesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        results = new Results();
-        results.setAway(0);
-        results.setHome(0);
         setContentView(R.layout.activity_hstart_games);
-        context = this.getApplicationContext();
-        bundle = getIntent().getExtras();
+        results = new Results();
         away = (TextView)findViewById(R.id.away);
         home = (TextView)findViewById(R.id.home);
         awayResultText = (TextView)findViewById(awayResult);
         homeResultText = (TextView)findViewById(R.id.homeResult);
-        away.setText(bundle.getString("awayName"));
-        home.setText(bundle.getString("homeName"));
+        if (savedInstanceState == null){
+            bundle = getIntent().getExtras();
+            results.setId(bundle.getInt("id"));
+            results.setAway(0);
+            results.setHome(0);
+            away.setText(bundle.getString("awayName"));
+            home.setText(bundle.getString("homeName"));
+        }
+        else{
+            super.onRestoreInstanceState(savedInstanceState);
+            results.setId(savedInstanceState.getInt("id"));
+            results.setAway(savedInstanceState.getInt("awayScore"));
+            results.setHome(savedInstanceState.getInt("homeScore"));
+            away.setText(bundle.getString("awayName"));
+            home.setText(bundle.getString("homeName"));
+        }
+
+        context = this.getApplicationContext();
         awayResultText.setText(results.getAway() + "");
         homeResultText.setText(results.getHome() + "");
 
         new BackgroundGetHockeyNumbersAway().execute();
         new BackgroundGetHockeyNumbersHome().execute();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putInt("id", bundle.getInt("id"));
+        savedInstanceState.putInt("awayScore", results.getAway());
+        savedInstanceState.putInt("homeScore", results.getHome());
+        savedInstanceState.putString("awayName", bundle.getString("awayName"));
+        savedInstanceState.putString("homeName", bundle.getString("homeName"));
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(this,"Impossible de fermer la fenêtre si la partie n'est pas terminé",Toast.LENGTH_LONG).show();
     }
 
     public void addGoal(View v){
@@ -95,8 +125,10 @@ public class HStartGamesActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
                     if(editAssist1.getText().length() > 0)
-                        if(Integer.parseInt(editAssist1.getText().toString()) == Integer.parseInt(goal.getText().toString()))
-                            validateAssist = false;
+                        if(goal.getText().length() > 0) {
+                            if (Integer.parseInt(editAssist1.getText().toString()) == Integer.parseInt(goal.getText().toString()))
+                                validateAssist = false;
+                        }
                 }
             }
         });
@@ -128,14 +160,20 @@ public class HStartGamesActivity extends AppCompatActivity {
                 String assist1 = editAssist1.getText().toString();
                 String assist2 = editAssist2.getText().toString();
                 if(editAssist2.getText().length() > 0) {
-                    if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(goal.getText().toString()))
-                        validateAssist = false;
-                    if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
-                        validateAssist = false;
+                    if (goal.getText().length() > 0){
+                        if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(goal.getText().toString()))
+                            validateAssist = false;
+                    }
+                    if (editAssist1.getText().length() > 0) {
+                        if (Integer.parseInt(editAssist2.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
+                            validateAssist = false;
+                    }
                 }
                 if(editAssist1.getText().length() > 0) {
-                    if (Integer.parseInt(goal.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
-                        validateAssist = false;
+                    if(goal.getText().length() > 0) {
+                        if (Integer.parseInt(goal.getText().toString()) == Integer.parseInt(editAssist1.getText().toString()))
+                            validateAssist = false;
+                    }
                 }
                 if(goal.getText().length() > 0 && validateAssist) {
                     //Add goal

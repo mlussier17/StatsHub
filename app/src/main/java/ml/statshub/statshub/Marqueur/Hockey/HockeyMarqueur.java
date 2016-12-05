@@ -26,15 +26,17 @@ public class HockeyMarqueur extends AppCompatActivity {
     private RecyclerView rView;
     public HGamesAdapter gAdapter;
     static public Context context;
+    public List<Games> gamelist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        gamelist = new ArrayList<Games>();
         context = this.getApplicationContext();
         setContentView(R.layout.activity_hockey_marqueur);
         rView = (RecyclerView)findViewById(R.id.hockeyGames);
         rView.setLayoutManager(new LinearLayoutManager(this));
-        gAdapter = new HGamesAdapter(this,new ArrayList<Games>());
+        gAdapter = new HGamesAdapter(this,gamelist);
         rView.setAdapter(gAdapter);
         new BackgroundTaskHockeyGames(this,rView,gAdapter).execute();
     }
@@ -86,11 +88,8 @@ class BackgroundTaskHockeyGames extends AsyncTask<Void,Void,String> {
                 Date newDate = format.parse(date);
                 games.setDate(format.format(newDate));
                 games.setEnded(json_data.getInt("IsEnded"));
-                hockeyGames.add(games);
+                ((HockeyMarqueur)c).gamelist.add(games);
             }
-            gAdapter = new HGamesAdapter(c,hockeyGames);
-            rView.setAdapter(gAdapter);
-
             gAdapter.notifyDataSetChanged();
 
         } catch (JSONException e) {

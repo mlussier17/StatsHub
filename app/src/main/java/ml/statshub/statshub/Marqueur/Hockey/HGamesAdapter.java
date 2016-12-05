@@ -23,7 +23,7 @@ public class HGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private Context context;
     private LayoutInflater inflater;
-    private List<Games> data = Collections.emptyList();
+    private List<Games> data;
 
     public HGamesAdapter(Context c, List<Games> games){
         this.context = c;
