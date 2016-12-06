@@ -305,8 +305,7 @@ public class HStartGamesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Boolean validate = false;
-                new BackgroundTaskHockeyEndGamePlayers(HStartGamesActivity.bundle.getInt("awayID"), numeroAway).execute();
-                new BackgroundTaskHockeyEndGamePlayers(HStartGamesActivity.bundle.getInt("homeID"), numeroHome).execute();
+
                 if(awayGoal.isChecked())
                     if (Integer.parseInt(awayScore.getText().toString()) > Integer.parseInt(homeScore.getText().toString()) && Integer.parseInt(awayScore.getText().toString()) > 0)validate = true;
                 if(homeGoal.isChecked())
@@ -327,6 +326,8 @@ public class HStartGamesActivity extends AppCompatActivity {
                         else if (soCheck.isChecked())new BackgroundTaskHockeyEndGameTeams(HStartGamesActivity.bundle.getInt("id"),HStartGamesActivity.bundle.getInt("awayID"),0,0,0,1,Integer.parseInt(homeScore.getText().toString())).execute();
                         else new BackgroundTaskHockeyEndGameTeams(HStartGamesActivity.bundle.getInt("id"),HStartGamesActivity.bundle.getInt("awayID"),0,1,0,0,Integer.parseInt(homeScore.getText().toString())).execute();
                     }
+                    new BackgroundTaskHockeyEndGamePlayers(HStartGamesActivity.bundle.getInt("awayID"), numeroAway).execute();
+                    new BackgroundTaskHockeyEndGamePlayers(HStartGamesActivity.bundle.getInt("homeID"), numeroHome).execute();
                     startActivity(new Intent(HStartGamesActivity.context, HockeyMarqueur.class));
                     finish();
                 }
@@ -354,7 +355,6 @@ class BackgroundTaskHockeyEndGameTeams extends AsyncTask<Void,Void,String>{
     private int otloses;
     private int soloses;
     private int ga;
-    private String jsonString;
 
 
     BackgroundTaskHockeyEndGameTeams(int gameId,int id, int wins, int loses, int otloses, int soloses, int ga){
@@ -372,6 +372,7 @@ class BackgroundTaskHockeyEndGameTeams extends AsyncTask<Void,Void,String>{
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         hMap.put("id",id + "");
         hMap.put("win",win + "");
         hMap.put("loses",loses + "");
@@ -381,7 +382,6 @@ class BackgroundTaskHockeyEndGameTeams extends AsyncTask<Void,Void,String>{
         hMap.put("gameId",gameId + "");
         HTTPRequest request = new HTTPRequest();
         jsonString = request.postQueryToHDB(URLQuery,hMap);
-
         return jsonString;
     }
 }
@@ -392,7 +392,7 @@ class BackgroundTaskHockeyEndGamePlayers extends AsyncTask<Void,Void,String>{
     private int teamId;
     private String jsonString;
     private HashMap<String,String> hMap = new HashMap<>();
-    NumbersAvailable numero;
+    private NumbersAvailable numero;
 
     BackgroundTaskHockeyEndGamePlayers(int teamId, NumbersAvailable numero){
         this.teamId = teamId;
@@ -488,7 +488,7 @@ class BackgroundTaskHockeyPostPenalty extends AsyncTask<Void,Void,String> {
     private int teamid;
     private int number;
     public String jsonString;
-    public int minutes;
+    private int minutes;
 
     BackgroundTaskHockeyPostPenalty(int id, int number, int minutes){
         teamid = id;
@@ -517,12 +517,12 @@ class BackgroundTaskHockeyPostPenalty extends AsyncTask<Void,Void,String> {
 }
 
 class BackgroundGetHockeyNumbersAway extends AsyncTask<Void,Void,String>{
-    private String jsonString;
     private HashMap<String,String> hMap = new HashMap<>();
     static public NumbersAvailable numbers;
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         hMap.put("id", HStartGamesActivity.bundle.getInt("awayID") + "");
         HTTPRequest request = new HTTPRequest();
         jsonString = request.postQueryToHDB(URL_HOCKEY_NUMBERS_PLAYERS,hMap);
@@ -550,12 +550,12 @@ class BackgroundGetHockeyNumbersAway extends AsyncTask<Void,Void,String>{
 }
 
 class BackgroundGetHockeyNumbersHome extends AsyncTask<Void,Void,String>{
-    private String jsonString;
     private HashMap<String,String> hMap = new HashMap<>();
     static public  NumbersAvailable numbers;
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         hMap.put("id", HStartGamesActivity.bundle.getInt("homeID") + "");
         HTTPRequest request = new HTTPRequest();
         jsonString = request.postQueryToHDB(URL_HOCKEY_NUMBERS_PLAYERS,hMap);

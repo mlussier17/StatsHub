@@ -1,8 +1,8 @@
 package ml.statshub.statshub.Marqueur.Hockey;
 
-/**
- * Created by 196128636 on 2016-11-28.
- */
+/*
+    Class to keep the results of the current game begin scored
+*/
 
 public class Results {
     private int id;

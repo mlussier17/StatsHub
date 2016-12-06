@@ -6,25 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.Collections;
 import java.util.List;
-
 import ml.statshub.statshub.Class.Players;
 import ml.statshub.statshub.R;
 
-/**
- * Created by 196128636 on 2016-10-19.
- */
-
-public class PlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    private Context context;
+class PlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private LayoutInflater inflater;
     private List<Players> data = Collections.emptyList();
 
-    public PlayersTeamsAdapter(Context c, List<Players> players) {
-        context = c;
-        inflater = LayoutInflater.from(context);
+    PlayersTeamsAdapter(Context c, List<Players> players) {
+        inflater = LayoutInflater.from(c);
         data = players;
     }
 
@@ -52,14 +44,11 @@ public class PlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public int getItemCount() {
-        return data.size();
-    }
+    public int getItemCount() {return data.size();}
 
     class MyHolder extends RecyclerView.ViewHolder{
 
         TextView textName;
-        TextView textFName;
         TextView textNumber;
         TextView textGP;
         TextView textG;
@@ -81,6 +70,5 @@ public class PlayersTeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             textPKG= (TextView) itemView.findViewById(R.id.playerPKG);
             textPen= (TextView) itemView.findViewById(R.id.playerPen);
         }
-
     }
 }

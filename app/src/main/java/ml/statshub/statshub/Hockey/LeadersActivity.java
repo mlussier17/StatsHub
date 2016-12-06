@@ -6,15 +6,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import ml.statshub.statshub.Class.Players;
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
@@ -22,7 +19,7 @@ import ml.statshub.statshub.Request.URLQuery;
 
 public class LeadersActivity extends AppCompatActivity {
     static  public Bundle bundle;
-    private RecyclerView rView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,41 +28,33 @@ public class LeadersActivity extends AppCompatActivity {
         TextView test;
         test = (TextView)findViewById(R.id.showPlayers);
         test.setText(bundle.getString("name"));
+        RecyclerView rView;
         rView = (RecyclerView)findViewById(R.id.listPlayers);
         rView.setLayoutManager(new LinearLayoutManager(this));
-        new BackgroundTask8(this, rView).execute();
+        new BackgroundHockeyGetLeaders(this, rView).execute();
     }
 }
-class BackgroundTask8 extends AsyncTask<Void,Void,String> {
+class BackgroundHockeyGetLeaders extends AsyncTask<Void,Void,String> {
 
-    public BackgroundTask8(AppCompatActivity c, RecyclerView vue){
+    BackgroundHockeyGetLeaders(AppCompatActivity c, RecyclerView vue){
         _c = c;
         playersLists = vue;
     }
     private AppCompatActivity _c;
-    private String jsonString;
     private String jsonUrl;
     private RecyclerView playersLists;
     private HashMap<String,String> hMap = new HashMap<>();
 
     @Override
-    protected void onPreExecute() {
-        jsonUrl = URLQuery.URL_LIST_HOCKEY_LEADERS_PER_LEAGUES;
-    }
+    protected void onPreExecute() {jsonUrl = URLQuery.URL_LIST_HOCKEY_LEADERS_PER_LEAGUES;}
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         hMap.put("id",LeadersActivity.bundle.getInt("id") + "");
         HTTPRequest request = new HTTPRequest();
         jsonString = request.postQueryToHDB(jsonUrl,hMap);
-
         return jsonString;
-    }
-
-
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
     }
 
     @Override

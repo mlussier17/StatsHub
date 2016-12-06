@@ -80,7 +80,6 @@ public class SoccerMarqueur extends AppCompatActivity {
 
                  ((SoccerMarqueur)c).gamelist.add(games);
              }
-
              gAdapter.notifyDataSetChanged();
 
          } catch (ParseException|JSONException e) {

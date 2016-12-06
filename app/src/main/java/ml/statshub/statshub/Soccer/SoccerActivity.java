@@ -11,14 +11,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
 import ml.statshub.statshub.R;
-import ml.statshub.statshub.Soccer.SCalendarFragment;
-import ml.statshub.statshub.Soccer.SLeagueFragment;
-import ml.statshub.statshub.Soccer.SLeaguesLeadersFragment;
 
-public class SoccerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class SoccerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     static public Context context;
 
     @Override
@@ -28,8 +23,6 @@ public class SoccerActivity extends AppCompatActivity
         setContentView(R.layout.activity_soccer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -63,15 +56,9 @@ public class SoccerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.leagues) {
-            fragment = new SLeagueFragment();
-
-        } else if (id == R.id.Calendar) {
-            fragment = new SCalendarFragment();
-
-        } else if (id == R.id.leaders) {
-            fragment = new SLeaguesLeadersFragment();
-        }
+        if (id == R.id.leagues)fragment = new SLeagueFragment();
+        else if (id == R.id.Calendar)fragment = new SCalendarFragment();
+        else if (id == R.id.leaders)fragment = new SLeaguesLeadersFragment();
 
         Fragment myFragment = getSupportFragmentManager().findFragmentByTag(id + "");
         if (!(myFragment != null && myFragment.isVisible()) && fragment != null) {

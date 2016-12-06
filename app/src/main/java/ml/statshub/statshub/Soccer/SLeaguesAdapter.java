@@ -8,23 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.Collections;
 import java.util.List;
-
 import ml.statshub.statshub.Class.Leagues;
 import ml.statshub.statshub.R;
 
-/**
- * Created by 196128636 on 2016-10-12.
- */
-
-public class SLeaguesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+ class SLeaguesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private Context context;
     private LayoutInflater inflater;
-    List<Leagues> data = Collections.emptyList();
+    private List<Leagues> data;
 
-    public SLeaguesAdapter(Context c, List<Leagues> leagues){
+     SLeaguesAdapter(Context c, List<Leagues> leagues){
         context = c;
         inflater = LayoutInflater.from(context);
         data = leagues;
@@ -33,8 +26,7 @@ public class SLeaguesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=inflater.inflate(R.layout.layoutleagues, parent,false);
-        MyHolder holder=new MyHolder(view);
-        return holder;
+        return new MyHolder(view);
     }
 
     @Override
@@ -60,12 +52,9 @@ public class SLeaguesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public int getItemCount() {
-        return data.size();
-    }
+    public int getItemCount() {return data.size();}
 
     class MyHolder extends RecyclerView.ViewHolder{
-
         TextView textName;
         TextView textSize;
 
@@ -75,7 +64,5 @@ public class SLeaguesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             textName= (TextView)itemView.findViewById(R.id.textName);
             textSize = (TextView)itemView.findViewById(R.id.textTeams);
         }
-
     }
-
 }

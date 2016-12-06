@@ -19,7 +19,6 @@ import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
 
 public class HockeyMarqueur extends AppCompatActivity {
-    private RecyclerView rView;
     public HGamesAdapter gAdapter;
     public List<Games> gamelist;
 
@@ -27,6 +26,7 @@ public class HockeyMarqueur extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gamelist = new ArrayList<Games>();
+        RecyclerView rView;
         setContentView(R.layout.activity_hockey_marqueur);
         rView = (RecyclerView)findViewById(R.id.hockeyGames);
         rView.setLayoutManager(new LinearLayoutManager(this));
@@ -40,8 +40,6 @@ class BackgroundTaskHockeyGames extends AsyncTask<Void,Void,String> {
 
     private AppCompatActivity c;
     private String URLQuery;
-    private String jsonString;
-
     private HGamesAdapter gAdapter;
 
 
@@ -55,6 +53,7 @@ class BackgroundTaskHockeyGames extends AsyncTask<Void,Void,String> {
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         HTTPRequest request = new HTTPRequest();
         jsonString = request.getQueryToHDB(URLQuery);
         return jsonString;
@@ -82,11 +81,8 @@ class BackgroundTaskHockeyGames extends AsyncTask<Void,Void,String> {
             }
             gAdapter.notifyDataSetChanged();
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (ParseException|JSONException e) {
             e.printStackTrace();
         }
-
     }
 }

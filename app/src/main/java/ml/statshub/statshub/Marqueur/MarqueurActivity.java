@@ -8,12 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
-
 import ml.statshub.statshub.Marqueur.Hockey.HockeyMarqueur;
 import ml.statshub.statshub.Marqueur.Soccer.SoccerMarqueur;
 import ml.statshub.statshub.R;
@@ -29,7 +26,7 @@ public class MarqueurActivity extends AppCompatActivity {
     String login = null;
     String pass = null;
     Boolean hockey = false;
-    Boolean soccer = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,27 +42,23 @@ public class MarqueurActivity extends AppCompatActivity {
         pass = password.getText().toString();
         login = users.getText().toString();
         hockey = bHockey.isChecked();
-        soccer = bSoccer.isChecked();
-        new BackgroundTaskLogin(this,login,pass,hockey,soccer).execute();
+        new BackgroundTaskLogin(this,login,pass,hockey).execute();
     }
 }
 
 class BackgroundTaskLogin extends AsyncTask<Void,Void,String> {
 
-    public BackgroundTaskLogin(AppCompatActivity c, String _login, String _password,Boolean hockey, Boolean soccer){
+    BackgroundTaskLogin(AppCompatActivity c, String _login, String _password,Boolean hockey){
         _c = c;
         login = _login;
         password = _password;
         this.hockey = hockey;
-        this.soccer = soccer;
     }
     private AppCompatActivity _c;
     private Boolean hockey;
-    private Boolean soccer;
-    private String jsonString;
     private String login;
     private String password;
-    String jsonUrl;
+    private String jsonUrl;
     private HashMap<String,String> hMap = new HashMap<>();
 
     @Override
@@ -73,6 +66,7 @@ class BackgroundTaskLogin extends AsyncTask<Void,Void,String> {
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         hMap.put("login",login);
         hMap.put("pwd", password);
         HTTPRequest request = new HTTPRequest();

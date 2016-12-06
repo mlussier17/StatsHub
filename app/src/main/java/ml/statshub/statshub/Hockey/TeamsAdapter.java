@@ -8,25 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.Collections;
 import java.util.List;
-
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Class.Teams;
 
-/**
- * Created by 196128636 on 2016-10-12.
- */
-
-public class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+ class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private Context context;
     private LayoutInflater inflater;
     private List<Teams> data = Collections.emptyList();
 
-    public TeamsAdapter(Context c, List<Teams> teams) {
+    TeamsAdapter(Context c, List<Teams> teams) {
         context = c;
-        inflater = LayoutInflater.from(context);
+        inflater = LayoutInflater.from(c);
         data = teams;
     }
 
@@ -63,13 +57,10 @@ public class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 context.startActivity(i);
             }
         });
-
     }
 
     @Override
-    public int getItemCount() {
-        return data.size();
-    }
+    public int getItemCount() {return data.size();}
 
     class MyHolder extends RecyclerView.ViewHolder{
 
@@ -82,8 +73,6 @@ public class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         TextView textPoints;
         TextView textGF;
         TextView textGA;
-
-        TextView textSize;
 
         // create constructor to get widget reference
         public MyHolder(View itemView) {
@@ -98,6 +87,5 @@ public class TeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             textGF= (TextView) itemView.findViewById(R.id.teamGF);
             textGA= (TextView) itemView.findViewById(R.id.teamGA);
         }
-
     }
 }

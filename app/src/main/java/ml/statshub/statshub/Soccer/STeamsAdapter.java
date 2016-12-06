@@ -8,23 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.Collections;
 import java.util.List;
-
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Class.Teams;
 
-/**
- * Created by 196128636 on 2016-10-12.
- */
-
-public class STeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+ class STeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private Context context;
     private LayoutInflater inflater;
     private List<Teams> data = Collections.emptyList();
 
-    public STeamsAdapter(Context c, List<Teams> teams) {
+    STeamsAdapter(Context c, List<Teams> teams) {
         context = c;
         inflater = LayoutInflater.from(context);
         data = teams;
@@ -66,9 +60,7 @@ public class STeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public int getItemCount() {
-        return data.size();
-    }
+    public int getItemCount() {return data.size();}
 
     class MyHolder extends RecyclerView.ViewHolder{
 
@@ -93,6 +85,5 @@ public class STeamsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             textGF= (TextView) itemView.findViewById(R.id.teamGF);
             textGA= (TextView) itemView.findViewById(R.id.teamGA);
         }
-
     }
 }

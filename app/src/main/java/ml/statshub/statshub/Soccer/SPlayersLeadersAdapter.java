@@ -6,21 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.Collections;
 import java.util.List;
-
 import ml.statshub.statshub.Class.Players;
 import ml.statshub.statshub.R;
 
-public class SPlayersLeadersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    private Context context;
+ class SPlayersLeadersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private LayoutInflater inflater;
     private List<Players> data = Collections.emptyList();
 
-    public SPlayersLeadersAdapter(Context c, List<Players> players) {
-        context = c;
-        inflater = LayoutInflater.from(context);
+    SPlayersLeadersAdapter(Context c, List<Players> players) {
+        inflater = LayoutInflater.from(c);
         data = players;
     }
 
@@ -46,9 +42,7 @@ public class SPlayersLeadersAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @Override
-    public int getItemCount() {
-        return data.size();
-    }
+    public int getItemCount() {return data.size();}
 
     class MyHolder extends RecyclerView.ViewHolder{
 
@@ -70,6 +64,5 @@ public class SPlayersLeadersAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             textYC= (TextView) itemView.findViewById(R.id.playerYC);
             textRC= (TextView) itemView.findViewById(R.id.playerRC);
         }
-
     }
 }

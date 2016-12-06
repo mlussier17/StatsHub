@@ -14,7 +14,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
-
 import ml.statshub.statshub.Class.Leagues;
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
@@ -22,56 +21,50 @@ import ml.statshub.statshub.Request.URLQuery;
 
 public class LeagueFragment extends Fragment{
 
-    private RecyclerView rView;
-
-
     public LeagueFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_league, container, false);
+        RecyclerView rView;
         rView = (RecyclerView)view.findViewById(R.id.ListLeagues);
         rView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        new BackgroundTask((AppCompatActivity)getActivity(), rView).execute();
+        new BackgroundHockeyGetLeagues((AppCompatActivity)getActivity(), rView).execute();
         return view;
     }
-
 }
 
-class BackgroundTask extends AsyncTask<Void,Void,String>{
+class BackgroundHockeyGetLeagues extends AsyncTask<Void,Void,String>{
 
-    public BackgroundTask(AppCompatActivity c, RecyclerView vue){
+    private AppCompatActivity _c;
+    private String jsonUrl;
+    private RecyclerView leaguesLists;
+
+    BackgroundHockeyGetLeagues(AppCompatActivity c, RecyclerView vue){
         _c = c;
         leaguesLists = vue;
     }
-    private AppCompatActivity _c;
-    private String jsonString;
-    String jsonUrl;
-    private RecyclerView leaguesLists;
-    private LeaguesAdapter lAdapter;
 
     @Override
     protected void onPreExecute() {jsonUrl = URLQuery.URL_LIST_HOCKEY_LEAGUES;}
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         HTTPRequest request = new HTTPRequest();
         jsonString = request.getQueryToHDB(jsonUrl);
-
         return jsonString;
     }
-
 
     @Override
     protected void onProgressUpdate(Void... values) {super.onProgressUpdate(values);}
 
     @Override
     protected void onPostExecute(String s) {
+        LeaguesAdapter lAdapter;
         List<Leagues> leaguesList = new ArrayList<>();
         try {
             JSONArray jArray = new JSONArray(s);
@@ -87,6 +80,7 @@ class BackgroundTask extends AsyncTask<Void,Void,String>{
             leaguesLists.setAdapter(lAdapter);
 
             lAdapter.notifyDataSetChanged();
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

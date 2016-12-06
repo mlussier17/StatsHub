@@ -15,17 +15,13 @@ import java.util.List;
 import ml.statshub.statshub.Class.Games;
 import ml.statshub.statshub.R;
 
-/**
- * Created by 196128636 on 2016-11-14.
- */
-
-public class SGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+ class SGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context context;
     private LayoutInflater inflater;
     private List<Games> data = Collections.emptyList();
 
-    public SGamesAdapter(Context c, List<Games> games){
+    SGamesAdapter(Context c, List<Games> games){
         this.context = c;
         this.inflater = LayoutInflater.from(this.context);
         this.data = games;
@@ -72,7 +68,6 @@ public class SGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     class MyHolder extends RecyclerView.ViewHolder{
         RelativeLayout rLayout;
-
         TextView textAway;
         TextView textHome;
         TextView textLocation;
@@ -87,6 +82,5 @@ public class SGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             textLocation= (TextView) itemView.findViewById(R.id.location);
             textDate= (TextView) itemView.findViewById(R.id.date);
         }
-
     }
 }

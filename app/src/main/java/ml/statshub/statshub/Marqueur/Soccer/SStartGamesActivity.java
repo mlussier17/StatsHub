@@ -68,6 +68,19 @@ public class SStartGamesActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putInt("id", bundle.getInt("id"));
+        savedInstanceState.putInt("awayScore", results.getAway());
+        savedInstanceState.putInt("homeScore", results.getHome());
+        savedInstanceState.putString("awayName", bundle.getString("awayName"));
+        savedInstanceState.putString("homeName", bundle.getString("homeName"));
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
     public void onBackPressed(){
         Toast.makeText(this,"Impossible de fermer la fenêtre si la partie n'est pas terminé",Toast.LENGTH_LONG).show();
     }
@@ -75,7 +88,6 @@ public class SStartGamesActivity extends AppCompatActivity {
     public void addGoal(View v){
         final Dialog builder = new Dialog(this);
         builder.setContentView(R.layout.soccerpopupgoal);
-
         teams = (RadioGroup) builder.findViewById(R.id.radioGroup);
         goal = (EditText)builder.findViewById(R.id.editGoal);
         awayGoal = (RadioButton)builder.findViewById(R.id.awayGoal);
@@ -130,7 +142,6 @@ public class SStartGamesActivity extends AppCompatActivity {
     public void addCard(View v){
         final Dialog builder = new Dialog(this);
         builder.setContentView(R.layout.soccerpopupcard);
-
         teams = (RadioGroup) builder.findViewById(R.id.radioGroup);
         awayGoal = (RadioButton)builder.findViewById(R.id.awayGoal);
         homeGoal = (RadioButton)builder.findViewById(R.id.homeGoal);
@@ -173,7 +184,6 @@ public class SStartGamesActivity extends AppCompatActivity {
         final NumbersAvailable numeroAway;
         final NumbersAvailable numeroHome;
         final Dialog builder1 = new Dialog(this);
-
         numeroAway = BackgroundGetNumbersAway.numbers;
         numeroHome = BackgroundGetNumbersHome.numbers;
         builder1.setContentView(R.layout.soccerpopupend);
@@ -351,12 +361,12 @@ class BackgroundTaskSoccerPostCard extends AsyncTask<Void,Void,String> {
 
 
 class BackgroundGetNumbersAway extends AsyncTask<Void,Void,String>{
-    private String jsonString;
     private HashMap<String,String> hMap = new HashMap<>();
     static public NumbersAvailable numbers;
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         hMap.put("id", SStartGamesActivity.bundle.getInt("awayID") + "");
         HTTPRequest request = new HTTPRequest();
         jsonString = request.postQueryToHDB(URL_SOCCER_NUMBERS_PLAYERS,hMap);
@@ -384,12 +394,12 @@ class BackgroundGetNumbersAway extends AsyncTask<Void,Void,String>{
 }
 
 class BackgroundGetNumbersHome extends AsyncTask<Void,Void,String>{
-    private String jsonString;
     private HashMap<String,String> hMap = new HashMap<>();
     static public  NumbersAvailable numbers;
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         hMap.put("id", SStartGamesActivity.bundle.getInt("homeID") + "");
         HTTPRequest request = new HTTPRequest();
         jsonString = request.postQueryToHDB(URL_SOCCER_NUMBERS_PLAYERS,hMap);

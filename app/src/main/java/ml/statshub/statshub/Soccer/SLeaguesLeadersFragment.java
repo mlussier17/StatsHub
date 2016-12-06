@@ -9,14 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import ml.statshub.statshub.Class.Leagues;
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
@@ -36,41 +33,36 @@ public class SLeaguesLeadersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sleagues_leaders, container, false);
         rView = (RecyclerView)view.findViewById(R.id.ListLeagues);
         rView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        new BackgroundTask9((AppCompatActivity)getActivity(), rView).execute();
+        new BackgroundSoccerLeaguesLeader((AppCompatActivity)getActivity(), rView).execute();
         return view;
     }
 
 }
 
-class BackgroundTask9 extends AsyncTask<Void,Void,String> {
+class BackgroundSoccerLeaguesLeader extends AsyncTask<Void,Void,String> {
+    private AppCompatActivity _c;
+    private String jsonUrl;
+    private RecyclerView leaguesLists;
 
-    public BackgroundTask9(AppCompatActivity c, RecyclerView vue){
+    BackgroundSoccerLeaguesLeader(AppCompatActivity c, RecyclerView vue){
         _c = c;
         leaguesLists = vue;
     }
-    private AppCompatActivity _c;
-    private String jsonString;
-    String jsonUrl;
-    private RecyclerView leaguesLists;
-    private SLeaguesLeaderAdapter lAdapter;
 
     @Override
     protected void onPreExecute() {jsonUrl = URLQuery.URL_LIST_SOCCER_LEAGUES;}
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         HTTPRequest request = new HTTPRequest();
         jsonString = request.getQueryToHDB(jsonUrl);
-
         return jsonString;
     }
 
-
-    @Override
-    protected void onProgressUpdate(Void... values) {super.onProgressUpdate(values);}
-
     @Override
     protected void onPostExecute(String s) {
+        SLeaguesLeaderAdapter lAdapter;
         List<Leagues> leaguesList = new ArrayList<>();
         try {
             JSONArray jArray = new JSONArray(s);

@@ -11,11 +11,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
 import ml.statshub.statshub.R;
 
-public class HockeyActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+public class HockeyActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     static public Context context;
 
     @Override

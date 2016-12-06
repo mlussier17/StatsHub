@@ -1,7 +1,5 @@
 package ml.statshub.statshub.Request;
 
-import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -19,10 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
-
-/**
- * Created by 196128636 on 2016-10-05.
- */
 
 public class HTTPRequest {
 
@@ -54,16 +48,11 @@ public class HTTPRequest {
                 inputStream.close();
                 conn.disconnect();
                 }
-            } catch (ProtocolException e1) {
-            e1.printStackTrace();
-        } catch (MalformedURLException e1) {
-            e1.printStackTrace();
-        } catch (IOException e1) {
+            } catch (IOException e1) {
             e1.printStackTrace();
         } finally {
             if(conn != null) conn.disconnect();
         }
-
         return response;
     }
 
@@ -71,7 +60,7 @@ public class HTTPRequest {
 
         URL url;
         String response = "";
-        String jsonString = null;
+        String jsonString;
         HttpURLConnection conn = null;
         StringBuilder stringBuilder = new StringBuilder();
         try {

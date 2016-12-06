@@ -10,14 +10,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Collections;
 import java.util.List;
 import ml.statshub.statshub.Class.Games;
 import ml.statshub.statshub.R;
-
-/**
- * Created by 196128636 on 2016-11-14.
- */
 
 public class HGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
@@ -25,7 +20,7 @@ public class HGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private LayoutInflater inflater;
     private List<Games> data;
 
-    public HGamesAdapter(Context c, List<Games> games){
+    HGamesAdapter(Context c, List<Games> games){
         this.context = c;
         this.inflater = LayoutInflater.from(this.context);
         this.data = games;
@@ -72,7 +67,6 @@ public class HGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     class MyHolder extends RecyclerView.ViewHolder{
         RelativeLayout rLayout;
-
         TextView textAway;
         TextView textHome;
         TextView textLocation;
@@ -87,6 +81,5 @@ public class HGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             textLocation= (TextView) itemView.findViewById(R.id.location);
             textDate= (TextView) itemView.findViewById(R.id.date);
         }
-
     }
 }

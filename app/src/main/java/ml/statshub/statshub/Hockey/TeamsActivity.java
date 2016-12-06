@@ -6,70 +6,57 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
 import ml.statshub.statshub.Request.URLQuery;
 import ml.statshub.statshub.Class.Teams;
 
 public class TeamsActivity extends AppCompatActivity {
-   static  public Bundle bundle;
-    private RecyclerView rView;
+   static public Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bundle = getIntent().getExtras();
         setContentView(R.layout.activity_teams);
+        RecyclerView rView;
         TextView test;
         test = (TextView)findViewById(R.id.showTeams);
         test.setText(bundle.getString("name"));
         rView = (RecyclerView)findViewById(R.id.listTeams);
         rView.setLayoutManager(new LinearLayoutManager(this));
-        new BackgroundTask1(this, rView).execute();
+        new BackgroundHockeyGetTeams(this, rView).execute();
     }
 
     static public Bundle getBundle() {return bundle;}
 }
-class BackgroundTask1 extends AsyncTask<Void,Void,String> {
+class BackgroundHockeyGetTeams extends AsyncTask<Void,Void,String> {
+    private AppCompatActivity _c;
+    private String jsonUrl;
+    private RecyclerView teamsLists;
+    private HashMap<String,String> hMap = new HashMap<>();
 
-    public BackgroundTask1(AppCompatActivity c, RecyclerView vue){
+    BackgroundHockeyGetTeams(AppCompatActivity c, RecyclerView vue){
         _c = c;
         teamsLists = vue;
     }
-    private AppCompatActivity _c;
-    private String jsonString;
-    private String jsonUrl;
-    private RecyclerView teamsLists;
-
-    private HashMap<String,String> hMap = new HashMap<>();
 
     @Override
-    protected void onPreExecute() {
-        jsonUrl = URLQuery.URL_LIST_HOCKEY_TEAMS_FROM_LEAGUES;
-    }
+    protected void onPreExecute() {jsonUrl = URLQuery.URL_LIST_HOCKEY_TEAMS_FROM_LEAGUES;}
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         hMap.put("id",TeamsActivity.getBundle().getInt("id") + "");
         HTTPRequest request = new HTTPRequest();
         jsonString = request.postQueryToHDB(jsonUrl,hMap);
-
         return jsonString;
-    }
-
-
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
     }
 
     @Override
@@ -97,9 +84,6 @@ class BackgroundTask1 extends AsyncTask<Void,Void,String> {
             teamsLists.setAdapter(tAdapter);
 
             tAdapter.notifyDataSetChanged();
-
-            //TextView textView = (TextView) _c.findViewById(R.id.ListLeagues);
-            //textView.setText(leaguesList);
         } catch (JSONException e) {
             e.printStackTrace();
         }
