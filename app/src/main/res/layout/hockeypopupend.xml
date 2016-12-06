@@ -39,26 +39,25 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/editHomeResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="30sp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="33dp"
-        android:layout_below="@+id/radioGroup"
-        android:layout_alignEnd="@+id/send" />
-
-    <TextView
         android:id="@+id/editAwayResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLength="2"
         android:text="0"
+        android:layout_marginStart="100sp"
+        android:layout_below="@id/radioGroup"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/editHomeResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
         android:textSize="30sp"
-        android:layout_marginEnd="45dp"
-        android:layout_above="@+id/radio2"
-        android:layout_alignStart="@+id/send" />
+        android:layout_below="@+id/radioGroup"
+        android:layout_toEndOf="@id/editAwayResult"
+        android:paddingStart="60sp"/>
+
 
     <RadioGroup
         android:id="@+id/radio2"
@@ -66,9 +65,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_below="@+id/editHomeResult"
+        android:layout_below="@+id/editAwayResult"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="26dp">
+        android:layout_marginTop="35dp">
 
         <RadioButton
             android:id="@+id/OT"
@@ -85,16 +84,12 @@
 
     <Button
         android:id="@+id/send"
+        android:layout_marginTop="35sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Soumettre"
-        android:gravity="center"
-
-        android:layout_below="@+id/radio2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp" />
-
-
+        android:layout_below="@id/radio2"
+        android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

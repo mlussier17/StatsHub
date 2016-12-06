@@ -62,7 +62,7 @@ public class HGamesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     i.putExtras(b);
                     context.startActivity(i);
                 }
-                else Toast.makeText(HockeyMarqueur.context,"La partie est terminée",Toast.LENGTH_SHORT).show();
+                else Toast.makeText(context,"La partie est terminée",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -39,32 +39,30 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/editHomeResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="30sp"
-        android:layout_marginTop="33dp"
-        android:layout_below="@+id/radioGroup"
-        android:layout_alignEnd="@+id/send"
-        android:layout_marginEnd="12dp" />
-
-    <TextView
         android:id="@+id/editAwayResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLength="2"
         android:text="0"
         android:textSize="30sp"
-        android:layout_above="@+id/send"
-        android:layout_alignStart="@+id/send" />
+        android:layout_below="@id/radioGroup"
+        android:layout_marginStart="100sp"/>
+
+    <TextView
+        android:id="@+id/editHomeResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="30sp"
+        android:layout_marginStart="60sp"
+        android:layout_toEndOf="@id/editAwayResult"
+        android:layout_below="@id/radioGroup"/>
 
     <Button
         android:id="@+id/send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Soumettre"
-        android:gravity="center"
         android:layout_marginTop="36dp"
         android:layout_below="@+id/editHomeResult"
         android:layout_centerHorizontal="true" />

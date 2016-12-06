@@ -87,7 +87,8 @@ class BackgroundTask5 extends AsyncTask<Void,Void,String> {
                 teams.setWins(json_data.getInt("NbWins"));
                 teams.setLoses(json_data.getInt("NbLoses"));
                 teams.setTies(json_data.getInt("NbTies"));
-                teams.setGF(json_data.getInt("NbGoalsFor"));
+                teams.setPoints(json_data.getInt("NbPoints"));
+                teams.setGF(json_data.getInt("Total"));
                 teams.setGA(json_data.getInt("NbGoalsAgainst"));
                 //teams.setYC(json_data.getInt("NbGoalsAgainst"));
                 //teams.setRC(json_data.getInt("NbGoalsAgainst"));

@@ -67,6 +67,11 @@ public class SStartGamesActivity extends AppCompatActivity {
         homeResultText.setText(results.getHome() + "");
     }
 
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(this,"Impossible de fermer la fenêtre si la partie n'est pas terminé",Toast.LENGTH_LONG).show();
+    }
+
     public void addGoal(View v){
         final Dialog builder = new Dialog(this);
         builder.setContentView(R.layout.soccerpopupgoal);
@@ -83,7 +88,6 @@ public class SStartGamesActivity extends AppCompatActivity {
             public void onClick(View v){
                 if(goal.getText().length() > 0) {
                     if (validate(1)) {
-                        Toast.makeText(SStartGamesActivity.this, "Good result", Toast.LENGTH_SHORT).show();
                         if (awayGoal.isChecked()) {
                             new BackgroundTaskSoccerPostGoal(SStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(SStartGamesActivity.goal.getText().toString())).execute();
                             results.setAway(1);
@@ -93,6 +97,7 @@ public class SStartGamesActivity extends AppCompatActivity {
                             results.setHome(1);
                             homeResultText.setText(results.getHome() + "");
                         }
+                        Toast.makeText(SStartGamesActivity.this, "But inséré", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else Toast.makeText(SStartGamesActivity.context,"Le but est vide", Toast.LENGTH_SHORT).show();
@@ -106,22 +111,20 @@ public class SStartGamesActivity extends AppCompatActivity {
 
     public Boolean validate(int id){
         int but;
-        if(id == 1)
-             but = Integer.parseInt(goal.getText().toString());
-        else
-            but = Integer.parseInt(card.getText().toString());
-
-        int equipe;
         NumbersAvailable numero;
-        equipe = homeGoal.isChecked()? bundle.getInt("homeID"):bundle.getInt("awayID");
+        boolean validate = true;
+
+        if(id == 1) but = Integer.parseInt(goal.getText().toString());
+        else but = Integer.parseInt(card.getText().toString());
         numero = homeGoal.isChecked()? BackgroundGetNumbersHome.numbers:BackgroundGetNumbersAway.numbers;
+
         for (int i = 0; i < numero.getNumbers().size();i++){
-            if( !(but == numero.getNumbers().get(i))) {
-                Toast.makeText(this, "Le numéro n'est pas enregistré avec cettre équipe", Toast.LENGTH_SHORT).show();
-                return false;
-            }
+            if( !(but == numero.getNumbers().get(i))) validate = false;
+            else return true;
         }
-        return true;
+        if(!validate)Toast.makeText(this, "Le numéro n'est pas enregistré avec cette équipe", Toast.LENGTH_SHORT).show();
+
+        return validate;
     }
 
     public void addCard(View v){
@@ -142,39 +145,37 @@ public class SStartGamesActivity extends AppCompatActivity {
             public void onClick(View v){
                 if(card.getText().length() > 0) {
                     if (validate(2)) {
-                        Toast.makeText(SStartGamesActivity.this, "Good result", Toast.LENGTH_SHORT).show();
+                        //Carton pour equipe visiteur
                         if (awayGoal.isChecked()) {
-                            if (yellowCard.isChecked())
+                            if (yellowCard.isChecked()) //Carton Jaune
                                 new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()), "yellow").execute();
-                            else
+                            else //Carton rouge
                                 new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("awayID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()), "red").execute();
                         } else {
-                            if (yellowCard.isChecked())
+                            //Carton pour equipe receveur
+                            if (yellowCard.isChecked()) //Carton jaune
                                 new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()), "yellow").execute();
-                            else
+                            else //Carton rouge
                                 new BackgroundTaskSoccerPostCard(SStartGamesActivity.bundle.getInt("homeID"), Integer.parseInt(SStartGamesActivity.card.getText().toString()), "red").execute();
                         }
+                        Toast.makeText(SStartGamesActivity.this, "Carton inséré", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else Toast.makeText(SStartGamesActivity.context,"Le carton est vide", Toast.LENGTH_SHORT).show();
 
                 builder.dismiss();
-
             }
         });
         builder.show();
-
     }
 
     public void endOfGame(View v){
-
-
         final NumbersAvailable numeroAway;
         final NumbersAvailable numeroHome;
+        final Dialog builder1 = new Dialog(this);
+
         numeroAway = BackgroundGetNumbersAway.numbers;
         numeroHome = BackgroundGetNumbersHome.numbers;
-
-        final Dialog builder1 = new Dialog(this);
         builder1.setContentView(R.layout.soccerpopupend);
         awayScore = (TextView)builder1.findViewById(R.id.editAwayResult);
         homeScore= (TextView)builder1.findViewById(R.id.editHomeResult);
@@ -183,6 +184,7 @@ public class SStartGamesActivity extends AppCompatActivity {
         sender = (Button)builder1.findViewById(R.id.send);
         awayScore.setText(results.getAway() + "");
         homeScore.setText(results.getHome() + "");
+
         if(results.getAway() > results.getHome())awayGoal.setChecked(true);
         else if(results.getAway() < results.getHome()) homeGoal.setChecked(true);
         else{
@@ -196,8 +198,6 @@ public class SStartGamesActivity extends AppCompatActivity {
         sender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if(awayScore.getText().length() > 0 && homeScore.getText().length() > 0){
                     //Away victory
                     if(awayGoal.isChecked()){
@@ -221,7 +221,6 @@ public class SStartGamesActivity extends AppCompatActivity {
                 }
                 else Toast.makeText(SStartGamesActivity.context,"Le score final est invalide",Toast.LENGTH_SHORT).show();
                 builder1.dismiss();
-
             }
 
         });
@@ -237,10 +236,7 @@ class BackgroundTaskSoccerEndGameTeams extends AsyncTask<Void,Void,String>{
     private int win;
     private int loses;
     private int ties;
-    private int soloses;
     private int ga;
-    private String jsonString;
-
 
     BackgroundTaskSoccerEndGameTeams(int gameId,int id, int wins, int loses, int ties, int ga){
         this.gameId = gameId;
@@ -256,6 +252,7 @@ class BackgroundTaskSoccerEndGameTeams extends AsyncTask<Void,Void,String>{
 
     @Override
     protected String doInBackground(Void... params) {
+        String jsonString;
         hMap.put("id",id + "");
         hMap.put("win",win + "");
         hMap.put("loses",loses + "");
@@ -275,7 +272,7 @@ class BackgroundTaskSoccerEndGamePlayers extends AsyncTask<Void,Void,String>{
     private int teamId;
     private String jsonString;
     private HashMap<String,String> hMap = new HashMap<>();
-    NumbersAvailable numero;
+    private NumbersAvailable numero;
 
     BackgroundTaskSoccerEndGamePlayers(int teamId, NumbersAvailable numero){
         this.teamId = teamId;
@@ -329,7 +326,7 @@ class BackgroundTaskSoccerPostCard extends AsyncTask<Void,Void,String> {
     private int teamid;
     private int number;
     public String jsonString;
-    public String card;
+    private String card;
 
     BackgroundTaskSoccerPostCard(int id, int number, String cards){
         teamid = id;

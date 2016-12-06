@@ -5,18 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
 import ml.statshub.statshub.Class.Games;
 import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
@@ -24,14 +21,16 @@ import ml.statshub.statshub.Request.HTTPRequest;
 public class SoccerMarqueur extends AppCompatActivity {
     private RecyclerView rView;
     public SGamesAdapter gAdapter;
+    public List<Games> gamelist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soccer_marqueur);
+        gamelist = new ArrayList<Games>();
         rView = (RecyclerView)findViewById(R.id.soccerGames);
         rView.setLayoutManager(new LinearLayoutManager(this));
-        gAdapter = new SGamesAdapter(this,new ArrayList<Games>());
+        gAdapter = new SGamesAdapter(this,gamelist);
         rView.setAdapter(gAdapter);
         new BackgroundTaskSoccerGames(this,rView,gAdapter).execute();
     }
@@ -43,12 +42,11 @@ public class SoccerMarqueur extends AppCompatActivity {
      private AppCompatActivity c;
      private String URLQuery;
      private String jsonString;
-     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
      private SGamesAdapter gAdapter;
 
 
-     public BackgroundTaskSoccerGames(AppCompatActivity c,RecyclerView view, SGamesAdapter adapt){
+     BackgroundTaskSoccerGames(AppCompatActivity c,RecyclerView view, SGamesAdapter adapt){
          this.c = c;
          this.rView = view;
          this.gAdapter = adapt;
@@ -66,7 +64,6 @@ public class SoccerMarqueur extends AppCompatActivity {
 
      @Override
      protected void onPostExecute(String s){
-         List<Games> soccerGames = new ArrayList<>();
          try{
              JSONArray jArray = new JSONArray(s);
              for (int i = 0; i < jArray.length();i++){
@@ -83,10 +80,8 @@ public class SoccerMarqueur extends AppCompatActivity {
                  Date newDate = format.parse(date);
                  games.setDate(format.format(newDate));
                  games.setEnded(json_data.getInt("IsEnded"));
-                 soccerGames.add(games);
+                 ((SoccerMarqueur)c).gamelist.add(games);
              }
-             gAdapter = new SGamesAdapter(c,soccerGames);
-             rView.setAdapter(gAdapter);
 
              gAdapter.notifyDataSetChanged();
 

@@ -217,7 +217,7 @@ public class HStartGamesActivity extends AppCompatActivity {
                         }
                     }
                 }
-                else Toast.makeText(HStartGamesActivity.context,"Le but est soit vide ou une répétition de chiffre", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(HStartGamesActivity.context,"Le but est soit vide ou une il y a une répétition de chiffre", Toast.LENGTH_SHORT).show();
                 validateAssist = true;
                 builder.dismiss();
             }
@@ -330,7 +330,7 @@ public class HStartGamesActivity extends AppCompatActivity {
                     startActivity(new Intent(HStartGamesActivity.context, HockeyMarqueur.class));
                     finish();
                 }
-                else Toast.makeText(HStartGamesActivity.context,"Le score final est invalide",Toast.LENGTH_SHORT).show();
+                else Toast.makeText(HStartGamesActivity.context,"Le score final ne peut être égal",Toast.LENGTH_SHORT).show();
                 builder1.dismiss();
 
             }
