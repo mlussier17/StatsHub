@@ -1,6 +1,5 @@
 package ml.statshub.statshub.Marqueur.Hockey;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,13 +32,12 @@ public class HockeyMarqueur extends AppCompatActivity {
         rView.setLayoutManager(new LinearLayoutManager(this));
         gAdapter = new HGamesAdapter(this,gamelist);
         rView.setAdapter(gAdapter);
-        new BackgroundTaskHockeyGames(this,rView,gAdapter).execute();
+        new BackgroundTaskHockeyGames(this,gAdapter).execute();
     }
 }
 
 class BackgroundTaskHockeyGames extends AsyncTask<Void,Void,String> {
 
-    private RecyclerView rView;
     private AppCompatActivity c;
     private String URLQuery;
     private String jsonString;
@@ -47,9 +45,8 @@ class BackgroundTaskHockeyGames extends AsyncTask<Void,Void,String> {
     private HGamesAdapter gAdapter;
 
 
-    BackgroundTaskHockeyGames(AppCompatActivity c,RecyclerView view, HGamesAdapter adapt){
+    BackgroundTaskHockeyGames(AppCompatActivity c, HGamesAdapter adapt){
         this.c = c;
-        this.rView = view;
         this.gAdapter = adapt;
     }
 

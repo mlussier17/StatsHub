@@ -1,8 +1,8 @@
 package ml.statshub.statshub.Class;
 
-/**
- * Created by 196128636 on 2016-10-05.
- */
+/*
+    Class to store the Players statistics from the database server
+*/
 
 public class Players {
     private int _id;

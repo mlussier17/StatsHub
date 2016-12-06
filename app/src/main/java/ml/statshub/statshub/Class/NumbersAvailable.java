@@ -2,9 +2,9 @@ package ml.statshub.statshub.Class;
 
 import java.util.List;
 
-/**
- * Created by 196128636 on 2016-11-14.
- */
+/*
+    Class to store the Numbers available for a specific team from the database server
+*/
 
 public class NumbersAvailable {
     private int idGames;

@@ -30,8 +30,6 @@ import static ml.statshub.statshub.Request.URLQuery.URL_SOCCER_NUMBERS_PLAYERS;
 public class SStartGamesActivity extends AppCompatActivity {
     static public Bundle bundle;
     static public Context context;
-    private TextView away;
-    private TextView home;
     public RadioGroup teams;
     static public EditText goal;
     static public EditText card;
@@ -50,6 +48,8 @@ public class SStartGamesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
+        TextView away;
+        TextView home;
         setContentView(R.layout.activity_sstart_games);
         results = new Results();
         results.setAway(0);

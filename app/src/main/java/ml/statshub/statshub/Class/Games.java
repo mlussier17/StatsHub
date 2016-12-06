@@ -1,10 +1,8 @@
 package ml.statshub.statshub.Class;
 
-import java.util.Date;
-
-/**
- * Created by 196128636 on 2016-11-14.
- */
+/*
+    Class to store the games from the database server
+*/
 
 public class Games {
     private int id;

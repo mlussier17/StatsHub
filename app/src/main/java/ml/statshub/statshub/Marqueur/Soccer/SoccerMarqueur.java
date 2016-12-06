@@ -19,7 +19,6 @@ import ml.statshub.statshub.R;
 import ml.statshub.statshub.Request.HTTPRequest;
 
 public class SoccerMarqueur extends AppCompatActivity {
-    private RecyclerView rView;
     public SGamesAdapter gAdapter;
     public List<Games> gamelist;
 
@@ -27,40 +26,38 @@ public class SoccerMarqueur extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soccer_marqueur);
+        RecyclerView rView;
         gamelist = new ArrayList<Games>();
         rView = (RecyclerView)findViewById(R.id.soccerGames);
         rView.setLayoutManager(new LinearLayoutManager(this));
         gAdapter = new SGamesAdapter(this,gamelist);
         rView.setAdapter(gAdapter);
-        new BackgroundTaskSoccerGames(this,rView,gAdapter).execute();
+        new BackgroundTaskSoccerGames(this,gAdapter).execute();
     }
 }
 
  class BackgroundTaskSoccerGames extends AsyncTask<Void,Void,String>{
 
-     private RecyclerView rView;
      private AppCompatActivity c;
      private String URLQuery;
-     private String jsonString;
-
      private SGamesAdapter gAdapter;
 
 
-     BackgroundTaskSoccerGames(AppCompatActivity c,RecyclerView view, SGamesAdapter adapt){
+     BackgroundTaskSoccerGames(AppCompatActivity c, SGamesAdapter adapt){
          this.c = c;
-         this.rView = view;
          this.gAdapter = adapt;
      }
 
      @Override
      protected void onPreExecute(){URLQuery = ml.statshub.statshub.Request.URLQuery.URL_SOCCER_GAMES;}
 
-    @Override
-    protected String doInBackground(Void... params) {
-        HTTPRequest request = new HTTPRequest();
-        jsonString = request.getQueryToHDB(URLQuery);
-        return jsonString;
-    }
+     @Override
+     protected String doInBackground(Void... params) {
+         String jsonString;
+         HTTPRequest request = new HTTPRequest();
+         jsonString = request.getQueryToHDB(URLQuery);
+         return jsonString;
+     }
 
      @Override
      protected void onPostExecute(String s){
@@ -80,16 +77,14 @@ public class SoccerMarqueur extends AppCompatActivity {
                  Date newDate = format.parse(date);
                  games.setDate(format.format(newDate));
                  games.setEnded(json_data.getInt("IsEnded"));
+
                  ((SoccerMarqueur)c).gamelist.add(games);
              }
 
              gAdapter.notifyDataSetChanged();
 
-         } catch (JSONException e) {
-             e.printStackTrace();
-         } catch (ParseException e) {
+         } catch (ParseException|JSONException e) {
              e.printStackTrace();
          }
-
      }
 }
